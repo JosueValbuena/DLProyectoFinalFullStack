@@ -1,0 +1,199 @@
+// Users
+// GET /users
+request:
+
+// POST /users
+request:
+    payload: {
+        id: number, 
+        nombre: string, 
+        email: string,
+        picture: string,
+        contrasenha: string,
+        direccion: string,
+        ciudad: string,
+        telefono: number,
+        fecha_registro: string
+    }
+
+// PUT /users/:id 
+request:
+    payload: { 
+        nombre: string, 
+        email: string,
+        picture: string,
+        contrasenha: string,
+        direccion: string,
+        ciudad: string,
+        telefono: number,
+    }
+
+//Login
+// POST /login
+request:
+    payload: {
+        email: string,
+        pasword: string
+    }
+response: {
+    token: string,
+    user:{
+        id: number,
+        email: string,
+        picture: string
+    }
+}
+
+//Publicaciones
+// GET /publicaciones
+    request:
+
+// POST /publicaciones
+    request:
+        payload: {
+            id: number,
+            id_user: number,
+            id_categoria: number,
+            titulo: string,
+            descripcion: string,
+            picture: string,
+            stock: number,
+            precio: number,
+            fecha_publicacion: string
+        }
+
+// PUT /publicaciones/:id
+    request:
+        payload: {
+            titulo: string,
+            descripcion: string,
+            picture: string,
+            stock: number,
+            precio: number,
+        }
+
+// DELETE /publicaciones/:id
+    request:
+
+//Pedidos
+// GET /pedidos 
+    request:
+
+// POST /pedidos
+    request:
+        body: {
+            id: number,
+            id_user: number,
+            id_pedido: number,
+            fecha: string,
+            estado: string
+        }
+
+//Detalle del pedido
+// GET /detatte_del_pedido 
+    request:
+
+// POST /detalle_del_pedido
+    request:
+        body: {
+            id: number,
+            id_pedido: number,
+            id_publicacion: number,
+            cantidad: number,
+            precio_unitario: number
+        }
+
+//Valoraciones
+// GET /valoraciones
+    request:
+
+// POST /valoraciones
+    request:
+        body: {
+            id: number,
+            id_publicacion: number,
+            id_user: number,
+            fecha: string,
+            cantidad: number
+        }
+
+// PUT /valoraciones/:id
+    request:
+        body: {
+            cantidad: number
+        }
+
+//Comentarios
+// GET /comentarios
+    request:
+
+// POST /comentarios
+    request:
+        body: {
+            id: number,
+            id_publicacion: number,
+            id_user: number,
+            contenido: string,
+            fecha: string
+        }
+
+// PUT /comentarios/:id
+    request:
+        body: {
+            contenido: string
+        }
+
+//Imagenes
+// GET /imagenes
+    request:
+
+// POST /imagenes
+    request:
+        body: {
+            id: number,
+            id_publicacion: number,
+            url: string
+        }
+
+// PUT /imagenes/:id
+    request:
+        body: {
+            url: string
+        }
+
+//Categorias
+// GET /categorias
+    request:
+
+// POST /categorias
+    request:
+        body: {
+            id: number,
+            id_publicacion: number,
+            nombre: string
+        }
+
+// PUT /categorias/:id
+    request:
+        body: {
+            nombre: string
+        }
+
+//Carrito de compras
+//GET /carrito_de_compras
+    request:
+
+// POST /carrito_de_compras
+    request:
+        body{
+            id: number,
+            id_usuario: number,
+            id_publicacion: number,
+            cantidad: number
+        }
+
+// PUT /carrito_de_compras
+    request:
+        body{
+            cantidad: number
+        }
