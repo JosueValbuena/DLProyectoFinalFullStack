@@ -1,23 +1,14 @@
 import React, { useContext } from 'react'
 import { DataContext } from '../context/DataContext';
 import CardsHome from '../components/CardsHome';
-import CardsHomePromoted from '../components/CardsHomePromoted';
+import SliderHome from '../components/SliderHome';
 
 const Home = () => {
     const { data } = useContext(DataContext);
 
     return (
         <div>
-            <div className='home-promoted'>
-                <h3>LO MAS VENDIDO!!!</h3>
-                <div className='home-promotedCards'>
-                    {data.map((ele) => {
-                        return (
-                            <CardsHomePromoted key={ele.id} data={ele} />
-                        )
-                    })}
-                </div>
-            </div>
+            <SliderHome data={data}/>
             <div className='home'>
                 {data.map((ele) => {
                     return (
