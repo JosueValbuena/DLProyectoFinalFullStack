@@ -3,7 +3,7 @@ import React from 'react'
 const CardWidget = () => {
   return (
     <>
-    CW
+    <i className="fa-solid fa-cart-shopping"></i>
     </>
   )
 }
