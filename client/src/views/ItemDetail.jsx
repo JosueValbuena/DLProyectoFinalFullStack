@@ -6,7 +6,7 @@ const ItemDetail = () => {
 
     const id = useParams();
     const { data } = useContext(DataContext);
-    const product = data.find(ele => ele.id == id.id)
+    const product = data.find(ele => ele.id === Number(id.id))
 
     return (
         <div className='itemDetail'>

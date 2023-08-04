@@ -14,11 +14,11 @@ const SliderHome = ({ data }) => {
                 <div className='home-promotedCards'>
                 <Swiper
                 spaceBetween={1}
-                slidesPerView={4} 
+                slidesPerView={5} 
             >
                     {data.map((ele) => {
                         return (
-                            <SwiperSlide><CardsHomePromoted key={ele.id} data={ele} /></SwiperSlide>
+                            <SwiperSlide key={ele.id}><CardsHomePromoted key={ele.id} data={ele} /></SwiperSlide>
                         )
                     })}
                     </Swiper>

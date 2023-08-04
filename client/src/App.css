@@ -45,9 +45,12 @@ html {
     background-color: white;
     border: 1px solid black;
     margin: 1rem 0.75rem;
+    border-radius: 32px;
 }
 
 .cardsHome>img {
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
     width: 100%;
     aspect-ratio: 2/2;
 }
@@ -72,20 +75,24 @@ html {
     text-align: center;
 }
 
-/* .home-promotedCards{
+ .home-promotedCards{
     display: flex;
     justify-content: center;
-} */
+    padding: 0 10rem;
+}
 
 .cardsHomePromoted {
     width: 10rem;
     margin: 1rem;
     border: 1px solid #CDD3D5;
+    border-bottom-right-radius: 32px;
+    border-top-left-radius: 32px;
 }
 
 .cardsHomePromoted-img {
     width: 100%;
-    aspect-ratio: 1/1
+    aspect-ratio: 1/1;
+    border-top-left-radius: 32px;
 }
 
 .itemDetail {
@@ -99,4 +106,31 @@ html {
 .itemDetail-img {
     width: 50%;
     aspect-ratio: 1/1;
+}
+
+.shoppingCart{
+    display: flex;
+    justify-content: space-around;
+}
+
+.shoppingCart-cardsContainer{
+    width: 60rem;
+}
+
+.cardSC{
+    background-color: #f3f0f1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardSC-left{
+    display: flex;
+    align-items: center;
+}
+
+.cardSCImg{
+    width: 10rem;
+    aspect-ratio: 1/1;
+    margin: 1.5rem 3rem;
 }

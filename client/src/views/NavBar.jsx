@@ -12,7 +12,7 @@ const NavBar = () => {
             <NavLink to="/categoria/categoriaDos" className="li">Categorias</NavLink>
             <NavLink to="/login" className="li">Iniciar Sesion</NavLink>
             <NavLink to="/register" className="li">Crea una cuenta</NavLink>
-            <NavLink to="/carrito" className="li cart"><CardWidget /></NavLink>
+            <NavLink to="/shopping-cart" className="li cart"><CardWidget /></NavLink>
         </ul>
         </div>
     </div>
