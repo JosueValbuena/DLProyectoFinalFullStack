@@ -21,16 +21,16 @@ const CardsHome = ({ data }) => {
         qty: 1
     }
 
-    /* const addSC = (event) => {
+    const addSC = (event) => {
         event.stopPropagation();
-        if (shoppingCart.find(ele => ele.id == data.id)) {
-            const productAdd = data.map((ele) => 
-                ele.id == data.id ? {...ele, qty: ele.qty + 1} : ele)
-            setShoppingCart(productAdd);
-        } else{
-            setShoppingCart({...shoppingCart, toSCAdd});
+        const isExist = shoppingCart.find((ele)=> ele.id === data.id);
+        if(isExist){
+            const products = shoppingCart.map(ele => ele.id === data.id ? {...ele, qty: ele.qty + 1 } : ele);
+            setShoppingCart([...products]);
+        }else{
+            setShoppingCart([...shoppingCart, toSCAdd]);
         }
-    } */
+    }
 
     return (
         <div className='cardsHome' onClick={handleClickNavigate}>

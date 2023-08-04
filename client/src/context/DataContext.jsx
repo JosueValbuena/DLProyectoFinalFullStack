@@ -13,12 +13,14 @@ export const DataProvider = ({ children }) => {
         setData(res);
     }
 
+    const totalItems = shoppingCart.map(ele => ele.qty).reduce((a, b) => a + b, 0);
+
     useEffect(() => {
         getData()
     }, [])
 
     return (
-        <DataContext.Provider value={{ data, setData, shoppingCart, setShoppingCart }}>
+        <DataContext.Provider value={{ data, setData, shoppingCart, setShoppingCart, totalItems }}>
             {children}
         </DataContext.Provider>
     )

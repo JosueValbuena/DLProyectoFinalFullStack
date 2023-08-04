@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { DataContext } from '../context/DataContext'
 
 const CardsShoppingCart = ({ data }) => {
 
-    
+    const {shoppingCart, setShoppingCart} = useContext(DataContext);
+
+    const plusQty = () => {
+        const plusProduct = shoppingCart.map(ele => ele.id === data.id ? {...ele, qty: ele.qty + 1} : ele);
+        setShoppingCart([...plusProduct]);
+    }
+
+    const lessQty = () => {
+        const lessProduct = shoppingCart.map(ele => ele.id === data.id ? {...ele, qty: ele.qty -1} : ele);
+        setShoppingCart([...lessProduct]);
+    }
 
     return (
         <div className='cardSC'>
@@ -16,10 +27,10 @@ const CardsShoppingCart = ({ data }) => {
                     <p>{data.price}</p>
                 </div>
             </div>
-            <div>
-                <button></button>
+            <div className='cardSC-right'>
+                <button onClick={lessQty}>-</button>
                 <p>{data.qty}</p>
-                <button></button>
+                <button onClick={plusQty}>+</button>
             </div>
         </div>
     )

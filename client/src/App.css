@@ -122,11 +122,17 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 1rem;
+    margin: 1rem;
 }
 
-.cardSC-left{
+.cardSC-left, .cardSC-right{
     display: flex;
     align-items: center;
+}
+
+.cardSC-right *{
+    padding: 0 0.5rem;
 }
 
 .cardSCImg{
