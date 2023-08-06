@@ -4,7 +4,7 @@ import logo from "../images/logo.png";
 
 export const Footer = () => {
   return (
-    <div className="shadow" style={{ background: "#220c10ff" }}>
+    <div className="shadow">
       <CDBBox
         display="flex"
         justifyContent="between"
