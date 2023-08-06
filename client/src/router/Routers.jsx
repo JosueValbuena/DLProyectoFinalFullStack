@@ -5,6 +5,7 @@ import RegisterPage from "../views/RegisterPage";
 import ItemDetail from "../views/ItemDetail";
 import Error from "../views/Error";
 import LoginPage from "../views/LoginPage";
+import { ProfilePage } from "../views/ProfilePage";
 
 const Routers = () => {
   return (
@@ -14,6 +15,7 @@ const Routers = () => {
       <Route path="*" element={<Error />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 };
