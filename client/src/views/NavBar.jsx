@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom'
 import CardWidget from '../components/CardWidget'
 import { DataContext } from '../context/DataContext'
 
+//lau
+import logo from "../images/logo.png";
+//
+
 const NavBar = () => {
 
   const {totalItems, shoppingCart} = useContext(DataContext);
@@ -20,9 +24,9 @@ const NavBar = () => {
             <NavLink to="/register" className="li">Crea una cuenta</NavLink>
             <NavLink to="/shopping-cart" className="li cart"><CardWidget />{totalItems}</NavLink>
         </ul>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

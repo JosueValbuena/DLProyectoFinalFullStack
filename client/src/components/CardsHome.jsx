@@ -2,9 +2,13 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../context/DataContext';
 
-const CardsHome = ({ data }) => {
 
-    const navigate = useNavigate();
+const CardsHome = ({ data }) => {
+  const navigate = useNavigate();
+
+  const handleClickNavigate = () => {
+    navigate(`/item-detail/${data.id}`);
+  };
 
     const { shoppingCart, setShoppingCart } = useContext(DataContext);
 
