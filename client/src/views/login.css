@@ -1,7 +1,7 @@
 .main {
   width: 100%;
   height: 100vh;
-  background-color: #506c64;
+  background-color:  #506c64ff;
   position: relative;
 }
 
@@ -14,7 +14,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #CDD3D5;
+  background:  #cdd3d5ff;
+
+  ;
 }
 .img-logo {
   width: 450px;

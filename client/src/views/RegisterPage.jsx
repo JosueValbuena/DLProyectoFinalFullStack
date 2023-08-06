@@ -13,10 +13,13 @@ export default function LoginPage() {
   return (
     <div className="main bg-customs">
       <MDBContainer className="main-center rounded-3">
+        <div className="text-center m-3">
+          <h3>Formulario de Registro</h3>
+        </div>
         <div className="col-md-12">
           <MDBRow>
             <MDBCol col="12" md="5" className="ml-5">
-              <img src={logo} className="img-logo p-5" alt="Wialot-logo" />
+              <img src={logo} className="img-logo p-5" alt="logo" />
             </MDBCol>
             <MDBCol col="12" md="6" className="d-flex align-items-center">
               <div className="col-10 ml-5 mt-5">

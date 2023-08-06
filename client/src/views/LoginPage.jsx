@@ -16,6 +16,9 @@ export default function LoginPage() {
   return (
     <div className="main bg-customs">
       <MDBContainer className="main-center rounded-3">
+        <div className="text-center m-3">
+          <h3>Iniciar Sesión</h3>
+        </div>
         <div className="col-md-12">
           <MDBRow>
             <MDBCol col="12" md="5" className="ml-5">
