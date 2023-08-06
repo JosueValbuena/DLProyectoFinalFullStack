@@ -9,9 +9,11 @@ import logo from "../images/logo.png";
 
 const NavBar = () => {
 
-  const {totalItems, shoppingCart} = useContext(DataContext);
-  console.log(totalItems)
-  console.log(shoppingCart)
+  const {totalItems, isAuthenticated, setIsAuthenticated} = useContext(DataContext);
+
+  const logOut = ()=>{
+    setIsAuthenticated(false)
+  }
 
   return (
     <div className='navbar'>
@@ -20,8 +22,12 @@ const NavBar = () => {
         <ul className='navbar-list'>
             <NavLink to="/" className="li">Inicio</NavLink>
             <NavLink to="/categoria/categoriaDos" className="li">Categorias</NavLink>
-            <NavLink to="/login" className="li">Iniciar Sesion</NavLink>
-            <NavLink to="/register" className="li">Crea una cuenta</NavLink>
+            {isAuthenticated ? 
+            <NavLink to="/user-profile" className="li">Perfil</NavLink> :
+            <NavLink to="/login" className="li">Iniciar Sesion</NavLink>}
+            {isAuthenticated ? 
+            <NavLink to="/" className="li" id='li-logut' onClick={logOut}>Cerrar Sesion</NavLink> : 
+            <NavLink to="/register" className="li">Crea una cuenta</NavLink>}
             <NavLink to="/shopping-cart" className="li cart"><CardWidget />{totalItems}</NavLink>
         </ul>
       </div>

@@ -6,10 +6,6 @@ import { DataContext } from '../context/DataContext';
 const CardsHome = ({ data }) => {
   const navigate = useNavigate();
 
-  const handleClickNavigate = () => {
-    navigate(`/item-detail/${data.id}`);
-  };
-
     const { shoppingCart, setShoppingCart } = useContext(DataContext);
 
     const handleClickNavigate = () => {
