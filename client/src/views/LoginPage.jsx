@@ -1,19 +1,17 @@
 import React from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
-import '../login/login.css';
+import "./login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function LoginPage() {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
 
   return (
     <div className="main bg-customs">

@@ -1,17 +1,20 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Home from '../views/Home'
-import ItemDetail from '../views/ItemDetail'
-import Error from '../views/Error'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "../views/Home";
+import RegisterPage from "../views/RegisterPage";
+import ItemDetail from "../views/ItemDetail";
+import Error from "../views/Error";
+import LoginPage from "../views/LoginPage";
 
 const Routers = () => {
   return (
     <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/item-detail/:id' element={<ItemDetail />} />
-        <Route path='*' element={<Error />}/>
+      <Route path="/" element={<Home />} />
+      <Route path="/item-detail/:id" element={<ItemDetail />} />
+      <Route path="*" element={<Error />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
-  )
-}
-
-export default Routers
+  );
+};
+export default Routers;

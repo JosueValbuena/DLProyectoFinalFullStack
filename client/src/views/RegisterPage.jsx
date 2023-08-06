@@ -1,19 +1,17 @@
 import React from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
-import '../login/login.css';
+import "./login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function LoginPage() {
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
 
   return (
     <div className="main bg-customs">
@@ -34,7 +32,7 @@ export default function LoginPage() {
                     size="lg"
                     {...register("nombre")}
                   />
-                   <MDBInput
+                  <MDBInput
                     wrapperClass="mb-4"
                     label="Email"
                     id="email"
@@ -42,7 +40,7 @@ export default function LoginPage() {
                     size="lg"
                     {...register("email")}
                   />
-                   <MDBInput
+                  <MDBInput
                     wrapperClass="mb-4"
                     label="Direccion"
                     id="direccion"
@@ -90,7 +88,7 @@ export default function LoginPage() {
           </MDBRow>
           <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5">
             <div className="text-dark mb-3 mb-md-0">
-             BikeTrail Copyright © 2023. All rights reserved.
+              BikeTrail Copyright © 2023. All rights reserved.
             </div>
           </div>
         </div>

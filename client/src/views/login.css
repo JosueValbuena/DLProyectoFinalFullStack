@@ -1,0 +1,41 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  background-color: #506c64;
+  position: relative;
+}
+
+.title-style {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.main-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #CDD3D5;
+}
+.img-logo {
+  width: 450px;
+  height: 450px;
+}
+.margin-customs {
+  margin-top: 500px;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: 100vh;
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100vh;
+  }
+}
