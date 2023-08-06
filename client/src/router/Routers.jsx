@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from '../views/Home'
 import ItemDetail from '../views/ItemDetail'
 import Error from '../views/Error'
@@ -12,26 +12,24 @@ import PublicarProducto from '../views/PublicarProducto.jsx'
 import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import { ProfilePage } from "../views/ProfilePage";
-//
-
+import { DataContext } from '../context/DataContext'
 
 const Routers = () => {
-    return (
-        <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/item-detail/:id' element={<ItemDetail />} />
-            <Route path='/shopping-cart' element={<ShoppingCart />} />
-            <Route path='*' element={<Error />} />
-            {/* Felipe */}
-            <Route path='/profile-gallery' element={<ProfileGallery />} />
+         
+  const {isAuthenticated} = useContext(DataContext);
+
+  return (
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/item-detail/:id' element={<ItemDetail />} />
+      <Route path='/shopping-cart' element={<ShoppingCart />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/user-profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route path='/profile-gallery' element={<ProfileGallery />} />
             <Route path='/publicar-producto' element={<PublicarProducto />} />
-            {/* Felipe */}
-            {/* Laura */}
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            {/* Laura */}
-        </Routes>
-    );
+      <Route path='*' element={<Error />} />
+    </Routes>
+  );
 };
 export default Routers;
