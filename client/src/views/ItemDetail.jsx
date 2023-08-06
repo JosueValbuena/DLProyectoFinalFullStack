@@ -8,29 +8,41 @@ const ItemDetail = () => {
   const { data } = useContext(DataContext);
   const product = data.find((ele) => ele.id === id.id);
 
-  return (
-    <div className="itemDetail">
-      <img className="itemDetail-img" src={product.url} alt="" />
-      <div>
-        <h3>{product.title}</h3>
-        <p>{product.description}</p>
-        <p>{product.price}</p>
-        <button className="itemDetail-button">Agregar al carrito</button>
-      </div>
-    </div>
+    const id = useParams();
+    const { data, shoppingCart, setShoppingCart } = useContext(DataContext);
+    const product = data.find(ele => ele.id === Number(id.id))
 
-    // <Card style={{ width: "18rem" }}>
-    //   <Card.Img variant="top" className="itemDetail-img" src={product.url} />
-    //   <Card.Body>
-    //     <Card.Title>{product.title}</Card.Title>
-    //     <Card.Text>
-    //       {product.description}
-    //       <p>{product.price}</p>
-    //     </Card.Text>
-    //     <Button variant="primary">Agregar al carrito</Button>
-    //   </Card.Body>
-    // </Card>
-  );
-};
+    const toSCAdd = {
+        id: product.id,
+        url: product.url,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        qty: 1
+    }
+
+    const addSC = (event) => {
+        event.stopPropagation();
+        const isExist = shoppingCart.find((ele) => ele.id === product.id);
+        if (isExist) {
+            const products = shoppingCart.map(ele => ele.id === product.id ? { ...ele, qty: ele.qty + 1 } : ele);
+            setShoppingCart([...products]);
+        } else {
+            setShoppingCart([...shoppingCart, toSCAdd]);
+        }
+    }
+
+    return (
+        <div className='itemDetail'>
+            <img className='itemDetail-img' src={product.url} alt="" />
+            <div>
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+                <p>{product.price}</p>
+                <button className='itemDetail-button' onClick={addSC}>Agregar al carrito</button>
+            </div>
+        </div>
+    )
+}
 
 export default ItemDetail;
