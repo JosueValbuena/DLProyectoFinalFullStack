@@ -6,6 +6,7 @@ export const DataProvider = ({ children }) => {
 
     const [data, setData] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
 
     const getData = async () => {
         const query = await fetch("./db.json");
@@ -20,7 +21,7 @@ export const DataProvider = ({ children }) => {
     }, [])
 
     return (
-        <DataContext.Provider value={{ data, setData, shoppingCart, setShoppingCart, totalItems }}>
+        <DataContext.Provider value={{ data, setData, shoppingCart, setShoppingCart, totalItems, isAuthenticated, setIsAuthenticated }}>
             {children}
         </DataContext.Provider>
     )
