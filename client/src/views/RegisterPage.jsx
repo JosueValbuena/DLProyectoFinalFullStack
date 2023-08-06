@@ -11,10 +11,10 @@ export default function LoginPage() {
   } = useForm();
 
   return (
-    <div className="main bg-customs">
+    <div className="main bg-customs shadow">
       <MDBContainer className="main-center rounded-3">
         <div className="text-center m-3">
-          <h3>Formulario de Registro</h3>
+          <h3 style={{ color: "#eee" }}>Formulario de Registro</h3>
         </div>
         <div className="col-md-12">
           <MDBRow>
@@ -87,9 +87,7 @@ export default function LoginPage() {
             </MDBCol>
           </MDBRow>
           <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5">
-            <div className="text-dark mb-3 mb-md-0">
-              BikeTrail Copyright © 2023. All rights reserved.
-            </div>
+            <div className=" mb-3 mb-md-0 "></div>
           </div>
         </div>
       </MDBContainer>

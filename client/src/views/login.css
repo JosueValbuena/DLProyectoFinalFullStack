@@ -1,22 +1,22 @@
 .main {
   width: 100%;
   height: 100vh;
-  background-color:  #506c64ff;
+  background-color:  #cdd3d5ff;
   position: relative;
 }
 
 .title-style {
   font-size: 2rem;
   font-weight: bold;
+  color: #eee;
 }
 .main-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background:  #cdd3d5ff;
-
-  ;
+  background-color:rgba(80, 108, 100, 0.9) ;
+  
 }
 .img-logo {
   width: 450px;
@@ -40,4 +40,7 @@
   .h-custom {
     height: 100vh;
   }
+}
+.bg-customs{
+  color: #eee !important;;
 }

@@ -14,21 +14,22 @@ export default function LoginPage() {
   } = useForm();
 
   return (
-    <div className="main bg-customs">
+    <div className="main bg-customs shadow">
       <MDBContainer className="main-center rounded-3">
         <div className="text-center m-3">
-          <h3>Iniciar Sesión</h3>
+          <h3 style={{ color: "#eee" }}>Iniciar Sesión</h3>
         </div>
         <div className="col-md-12">
           <MDBRow>
             <MDBCol col="12" md="5" className="ml-5">
-              <img src={logo} className="img-logo p-5" alt="Wialot-logo" />
+              <img src={logo} className="img-logo p-5" alt="logo" />
             </MDBCol>
             <MDBCol col="12" md="6" className="d-flex align-items-center">
               <div className="col-10 ml-5 mt-5">
                 <form>
                   <MDBInput
-                    wrapperClass="mb-4"
+                    style={{ color: "#eee" }}
+                    wrapperClass="mb-4 "
                     label="Email address"
                     id="email"
                     type="email"
@@ -58,9 +59,7 @@ export default function LoginPage() {
             </MDBCol>
           </MDBRow>
           <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5">
-            <div className="text-dark mb-3 mb-md-0">
-              BikeTrail Copyright © 2023. All rights reserved.
-            </div>
+            <div className="text-dark mb-3 mb-md-0"></div>
           </div>
         </div>
       </MDBContainer>
