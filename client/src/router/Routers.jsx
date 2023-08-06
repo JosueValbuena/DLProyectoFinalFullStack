@@ -5,6 +5,9 @@ import ItemDetail from '../views/ItemDetail'
 import Error from '../views/Error'
 import ShoppingCart from '../views/ShoppingCart'
 
+import ProfileGallery from '../views/ProfileGallery.jsx'
+import PublicarProducto from '../views/PublicarProducto.jsx'
+
 //lau
 import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
@@ -12,7 +15,7 @@ import { ProfilePage } from "../views/ProfilePage";
 import { DataContext } from '../context/DataContext'
 
 const Routers = () => {
-
+         
   const {isAuthenticated} = useContext(DataContext);
 
   return (
@@ -23,6 +26,8 @@ const Routers = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/user-profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route path='/profile-gallery' element={<ProfileGallery />} />
+            <Route path='/publicar-producto' element={<PublicarProducto />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );
