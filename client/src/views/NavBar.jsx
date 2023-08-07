@@ -25,6 +25,7 @@ const NavBar = () => {
             {isAuthenticated ? 
             <NavLink to="/user-profile" className="li">Perfil</NavLink> :
             <NavLink to="/login" className="li">Iniciar Sesion</NavLink>}
+            {isAuthenticated && <NavLink to="/post-product" className="li">Publicar Porducto</NavLink>}
             {isAuthenticated ? 
             <NavLink to="/" className="li" id='li-logut' onClick={logOut}>Cerrar Sesion</NavLink> : 
             <NavLink to="/register" className="li">Crea una cuenta</NavLink>}
