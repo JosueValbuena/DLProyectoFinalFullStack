@@ -42,5 +42,8 @@
   }
 }
 .bg-customs{
-  color: #eee !important;;
+  color: #eee !important;
 }
+ .bg-footer{
+  background: #220c10ff;
+ }

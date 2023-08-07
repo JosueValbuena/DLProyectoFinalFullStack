@@ -7,8 +7,11 @@ import { useForm } from "react-hook-form";
 export default function LoginPage() {
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="main bg-customs shadow">
@@ -23,7 +26,7 @@ export default function LoginPage() {
             </MDBCol>
             <MDBCol col="12" md="6" className="d-flex align-items-center">
               <div className="col-10 ml-5 mt-5">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <MDBInput
                     wrapperClass="mb-4"
                     label="Ingresar Nombre"
@@ -79,7 +82,7 @@ export default function LoginPage() {
                       size="lg"
                       type="submit"
                     >
-                      Login
+                      Registrar
                     </button>
                   </div>
                 </form>

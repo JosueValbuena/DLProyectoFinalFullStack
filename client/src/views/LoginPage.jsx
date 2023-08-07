@@ -13,6 +13,8 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
+  const onSubmit = (data) => console.log(data);
+
   return (
     <div className="main bg-customs shadow">
       <MDBContainer className="main-center rounded-3">
@@ -26,7 +28,7 @@ export default function LoginPage() {
             </MDBCol>
             <MDBCol col="12" md="6" className="d-flex align-items-center">
               <div className="col-10 ml-5 mt-5">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <MDBInput
                     style={{ color: "#eee" }}
                     wrapperClass="mb-4 "
