@@ -27,7 +27,7 @@ const Routers = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/user-profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
         <Route path='/profile-gallery' element={<ProfileGallery />} />
-            <Route path='/publicar-producto' element={<PublicarProducto />} />
+            <Route path='/post-product' element={<PublicarProducto />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );
