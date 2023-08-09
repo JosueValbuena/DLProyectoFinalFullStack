@@ -1,0 +1,27 @@
+//dependencias
+
+npm init -y
+
+express
+
+nodemon
+
+pg
+
+dotenv
+
+cors
+
+jsonwebtoken
+
+bcryptjs
+
+//base de datos
+
+CREATE DATABASE bikeproject;
+
+/c bikeproject
+
+CREATE TABLE usuarios(id SERIAL, nombre VARCHAR(50), email VARCHAR(50), contrasena VARCHAR(250), direccion VARCHAR(250), ciudad VARCHAR(50), telefono INT, fecha_registro date);
+
+
