@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
 import { useForm } from "react-hook-form";
+import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Message from "../components/Message";
 
 export default function LoginPage() {
   const {
@@ -13,7 +14,17 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const {isAuthenticated ,setIsAuthenticated} = useContext(DataContext);
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    if(data.email === "email@email.com" && data.password === "asdfg"){
+      setIsAuthenticated(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 2500)
+    }
+  };
 
   return (
     <div className="main bg-customs shadow">
@@ -30,12 +41,13 @@ export default function LoginPage() {
               <div className="col-10 ml-5 mt-5">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <MDBInput
-                    style={{ color: "#eee" }}
+                    style={{ color: "#000" }}
                     wrapperClass="mb-4 "
                     label="Email address"
                     id="email"
                     type="email"
                     size="lg"
+                    placeholder="Ingrese email"
                     {...register("email")}
                   />
                   {errors.password && <p>This field is required</p>}
@@ -45,6 +57,7 @@ export default function LoginPage() {
                     id="password"
                     type="password"
                     size="lg"
+                    placeholder="Ingrese contraseña"
                     {...register("password", { required: true })}
                   />
                   <div className="text-center text-md-start mt-4 pt-2">
@@ -57,6 +70,7 @@ export default function LoginPage() {
                     </button>
                   </div>
                 </form>
+                {isAuthenticated && <Message message="Usuario aunteticado correctamente" />}
               </div>
             </MDBCol>
           </MDBRow>
