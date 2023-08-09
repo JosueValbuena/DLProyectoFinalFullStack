@@ -6,7 +6,7 @@ export const DataProvider = ({ children }) => {
 
     const [data, setData] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
-    const [isAuthenticated, setIsAuthenticated] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     const getData = async () => {
         const query = await fetch("./db.json");

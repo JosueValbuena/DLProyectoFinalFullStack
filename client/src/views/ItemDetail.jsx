@@ -1,13 +1,8 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 
 const ItemDetail = () => {
-  //   const id = useParams();
-  //   const { data } = useContext(DataContext);
-  //   const product = data.find((ele) => ele.id === id.id);
 
   const id = useParams();
   const { data, shoppingCart, setShoppingCart } = useContext(DataContext);
