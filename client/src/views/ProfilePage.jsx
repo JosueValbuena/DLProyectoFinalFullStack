@@ -55,6 +55,9 @@ export function ProfilePage() {
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="d-flex justify-content-end text-center py-1">
+                  <MDBCardText className="btn btn-primary me-5">
+                    Mis Publicaciones
+                  </MDBCardText>
                   <div>
                     <MDBCardText className="mb-1 h5">25</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
