@@ -8,8 +8,14 @@ export const DataProvider = ({ children }) => {
     const [shoppingCart, setShoppingCart] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+    const urlServer = "http://localhost:3001";
+    const endpoints = {
+        user: "/usuarios",
+        publicaciones: "/publicaciones"
+        }
+
     const getData = async () => {
-        const query = await fetch("./db.json");
+        const query = await fetch(urlServer+endpoints.publicaciones);
         const res = await query.json();
         setData(res);
     }

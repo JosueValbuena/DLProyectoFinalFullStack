@@ -6,6 +6,21 @@ const getUsers = async () => {
     return user
 };
 
+const getProducts = async () => {
+    const query = "SELECT * FROM publicaciones";
+    const { rows: products } = await pool.query(query);
+    return products
+}
+
+const getReviews = async (id) => {
+    const query = "SELECT * FROM comentarios WHERE id_publicacion = $1";
+    const values = [id];
+    const { rows: comentarios } = await pool.query(query, values);
+    return comentarios
+}
+
 module.exports = {
-    getUsers
+    getUsers,
+    getProducts,
+    getReviews
 }

@@ -1,0 +1,41 @@
+//dependencias
+
+npm init -y
+
+express
+
+nodemon
+
+pg
+
+dotenv
+
+cors
+
+jsonwebtoken
+
+bcryptjs
+
+//base de datos
+
+CREATE DATABASE bikeproject;
+
+/c bikeproject
+
+CREATE TABLE usuarios(id SERIAL PRIMARY KEY, nombre VARCHAR(50), email VARCHAR(50), contrasena VARCHAR(250), direccion VARCHAR(250), ciudad VARCHAR(50), telefono INT, fecha_registro date);
+
+INSERT INTO usuarios VALUES (DEFAULT, 'josue valbuena', 'josue@email.com', 'asdfg', 'moneda 1500', 'santiago', '123456789', '2020-05-15'), (DEFAULT, 'anne baradel', 'anne@email.com', 'asdfg', 'amunategui 1000', 'santiago', '123456789', '2022-05-18'), (DEFAULT, 'nicole quijada', 'nicole@email.com', 'asdfg', 'tobalaba 500', 'providencia', '123456789', '2021-01-31');
+
+CREATE TABLE Publicaciones (
+  id SERIAL PRIMARY KEY,
+  id_usuario INT REFERENCES Usuarios(id),
+  titulo VARCHAR(200),
+  descripcion TEXT,
+  stock INT,
+  precio INT,
+  img VARCHAR(100),
+  fecha_publicacion TIMESTAMP
+);
+
+INSERT INTO publicaciones VALUES (DEFAULT, 1, 'trek marlin 5', 'bicicleta trek marlin 5 aro 29', 10, 299990, '2023-12-31','https://bequick.cl/cdn/shop/products/TREKMARLIN527.5AZULS20222_a86ea347-96dc-49cb-9c7c-662091696df8_1200x.jpg?v=1630456412'), 
+(DEFAULT, 2, 'trek marlin 7', 'bicicleta trek marlin 7 aro 27.5', 10, 349990, '2020-05-10', 'https://media.trekbikes.com/image/upload/f_auto,fl_progressive:semi,q_auto,w_800,h_600,c_pad/Marlin5_21_33136_A_Portrait');
