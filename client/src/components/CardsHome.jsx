@@ -5,10 +5,6 @@ import { DataContext } from "../context/DataContext";
 const CardsHome = ({ data }) => {
   const navigate = useNavigate();
 
-  // const handleClickNavigate = () => {
-  //   navigate(`/item-detail/${data.id}`);
-  // };
-
   const { shoppingCart, setShoppingCart } = useContext(DataContext);
 
   const handleClickNavigate = () => {
@@ -39,13 +35,13 @@ const CardsHome = ({ data }) => {
 
   return (
     <div className="cardsHome" onClick={handleClickNavigate}>
-      <img src={data.url} alt="" />
+      <img src={data.img} alt="" />
       <div>
-        <h3>{data.title}</h3>
-        <p>{data.description}</p>
+        <h3>{data.titulo}</h3>
+        <p>{data.descripcion}</p>
       </div>
       <div>
-        <p>${data.price}</p>
+        <p>${data.precio}</p>
       </div>
       <div className="cardsHome-button-div">
         <button className="cardsHome-button" onClick={addSC}>
