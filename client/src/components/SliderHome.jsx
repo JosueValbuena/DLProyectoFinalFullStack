@@ -8,13 +8,16 @@ import 'swiper/css';
 
 
 const SliderHome = ({ data }) => {
+
+    console.log(data);
+
     return (
             <div className='home-promoted'>
                 <h3>LO MAS VENDIDO!!!</h3>
                 <div className='home-promotedCards'>
                 <Swiper
                 spaceBetween={1}
-                slidesPerView={5} 
+                slidesPerView={1} 
             >
                     {data.map((ele) => {
                         return (
