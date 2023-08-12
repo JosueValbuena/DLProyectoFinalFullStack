@@ -11,9 +11,9 @@ const CardsHomePromoted = ({data}) => {
 
     return (
     <div className='cardsHomePromoted' onClick={handleClickNavigate}>
-        <img className='cardsHomePromoted-img' src={data.url} alt="" />
-        <h3>{data.title}</h3>
-        <p>{data.price}</p>
+        <img className='cardsHomePromoted-img' src={data.img} alt="" />
+        <h3>{data.titulo}</h3>
+        <p>{data.precio}</p>
     </div>
   )
 }
