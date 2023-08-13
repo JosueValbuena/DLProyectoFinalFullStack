@@ -43,10 +43,18 @@ const createUser = async (nombre, email, contrasena, direccion, ciudad, telefono
     return userCreted;
 }
 
+const getFavoritos = async (id_usuarios, id_publicacion) => {
+    const query = "SELECT publicaciones.img, publicaciones.titulo, publicaciones.precio FROM publicaciones INNER JOIN favoritos ON publicaciones.id = favoritos.id_publicaciones INNER JOIN usuarios ON usuarios.id = favoritos.id_usuarios WHERE id_publicaciones = $2 and id_usuarios = $1"
+    const values = [id_usuarios, id_publicacion];
+    const { rows: favoritos } = await pool.query(query, values);
+    return favoritos
+}
+
 
 module.exports = {
     getProducts,
     getReviews,
     userLogin,
-    createUser
+    createUser,
+    getFavoritos
 }

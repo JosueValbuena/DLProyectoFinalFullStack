@@ -107,3 +107,12 @@ CREATE TABLE Publicaciones_Categorias (
   id_publicacion INT REFERENCES Publicaciones(id),
   id_categoria INT REFERENCES Categorias(id)
 );
+
+-- Crea tabla de Favoritos
+CREATE TABLE favoritos (
+  id SERIAL PRIMARY KEY,
+  id_usuarios INT,
+  id_publicaciones INT,
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id),
+  FOREIGN KEY (id_publicaciones) REFERENCES publicaciones(id)
+);

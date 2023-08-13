@@ -12,6 +12,7 @@ import RegisterPage from "../views/RegisterPage";
 import LoginPage from "../views/LoginPage";
 import { ProfilePage } from "../views/ProfilePage";
 import { DataContext } from '../context/DataContext'
+import Like from '../views/Like'
 
 const Routers = () => {
          
@@ -27,6 +28,7 @@ const Routers = () => {
       <Route path="/user-profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
       <Route path='/profile-gallery' element={<ProfileGallery />} />
       <Route path='/post-product' element={<PublicarProducto />} />
+      <Route path='/liked' element={<Like />} />
       <Route path='*' element={<Error />} />
     </Routes>
   );

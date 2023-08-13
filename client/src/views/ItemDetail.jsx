@@ -6,6 +6,7 @@ const ItemDetail = () => {
 
   const [comentarios, setComentarios] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [favoritos, setFavoritos] = useState(false);
 
 
   const { data, shoppingCart, setShoppingCart } = useContext(DataContext);
@@ -13,7 +14,7 @@ const ItemDetail = () => {
   const id = useParams();
 
   const getComentarios = async () => {
-    const data = await fetch("http://localhost:3001/comentarios/"+id.id);
+    const data = await fetch("http://localhost:3001/comentarios/" + id.id);
     const res = await data.json();
     setLoader(false);
     setComentarios(res)
@@ -47,6 +48,10 @@ const ItemDetail = () => {
     }
   };
 
+  const handleFavoritos = () => {
+    setFavoritos(!favoritos)
+  }
+
   return (
     <div>
       <div className="itemDetail">
@@ -59,6 +64,12 @@ const ItemDetail = () => {
           <button className="itemDetail-button" onClick={addSC}>
             Agregar al carrito
           </button>
+          <div onClick={handleFavoritos}>
+            {favoritos ? <div>
+          <p><i className="fa-sharp fa-solid fa-heart"></i></p>
+          <p>Añadido a favoritos</p>
+          </div> : <p><i className="fa-sharp fa-regular fa-heart"></i></p>}
+          </div>
         </div>
       </div>
 

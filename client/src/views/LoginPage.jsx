@@ -36,10 +36,6 @@ export default function LoginPage() {
 
   const onSubmit = (data) => {
     getUserLogin(data);
-    /* if(data.email === "email@email.com" && data.password === "asdfg"){
-      ;
-      
-    } */
   };
 
   return (

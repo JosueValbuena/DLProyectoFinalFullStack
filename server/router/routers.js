@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { getProducts, getReviews, createUser, userLogin } = require("../consultas");
+const { getProducts, getReviews, createUser, userLogin, getFavoritos } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -46,6 +46,7 @@ router.post("/login", checkCredentiaslMiddleware, async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const { nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro } = req.body;
+        console.log(req.body)
         await createUser(nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro);
         res.json({ mensaje: "Usuario creado exitosamente" });
     } catch (error) {
@@ -58,6 +59,13 @@ router.get("/profile", (req, res) => {
     const { email, correo, contraseña } = req.body;
     console.log(req.body);
     res.json({ mensaje: "Get Profile" });
+});
+
+router.get("/usuarios/:idUsuario/favoritos/:idPublicacion", async (req, res) => {
+    const id_usuarios = req.params.idUsuario;
+    const id_publicacion = req.params.idPublicacion;
+    const favoritos = await getFavoritos(id_usuarios, id_publicacion);
+    res.send(favoritos);
 });
 
 module.exports = router;
