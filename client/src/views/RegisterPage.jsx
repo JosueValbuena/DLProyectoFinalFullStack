@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Message from "../components/Message";
 
 export default function LoginPage() {
+
+  const [addUser, setAddUser ] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const postRegisterUser = async (data)=>{
+  const postRegisterUser = async (data) => {
+    const { nombre, email, contrasena, direccion, ciudad, telefono } = data;
+    console.log(data)
     try {
-      await axios.post("http://localhost:3001/register", {data})
+      await axios.post("http://localhost:3001/register", { nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro:"2021-05-20" })
+      setAddUser(true);
+      setTimeout(() => {
+        navigate("/")
+      }, 2500);
     } catch (error) {
       console.log(error)
     }
@@ -91,7 +103,7 @@ export default function LoginPage() {
                     type="password"
                     size="lg"
                     placeholder="Contrasena"
-                    {...register("password", { required: true })}
+                    {...register("contrasena", { required: true })}
                   />
                   <MDBInput
                     wrapperClass="mb-4"
@@ -100,7 +112,7 @@ export default function LoginPage() {
                     type="password"
                     size="lg"
                     placeholder="confirma contrasena"
-                    {...register("confirmar-password", { required: true })}
+                    {...register("confirmar-contrasena", { required: true })}
                   />
                   <div className="text-center text-md-start mt-4 pt-2">
                     <button
@@ -112,6 +124,7 @@ export default function LoginPage() {
                     </button>
                   </div>
                 </form>
+                {addUser && <Message message={"Usuario agregado correctamente"} />}
               </div>
             </MDBCol>
           </MDBRow>

@@ -33,6 +33,11 @@ const NavBar = () => {
             </NavLink>
           )}
           {isAuthenticated && (
+            <NavLink to="/liked" className="li">
+              Favoritos
+            </NavLink>
+          )}
+          {isAuthenticated && (
             <NavLink to="/post-product" className="li">
               Publicar Porducto
             </NavLink>
