@@ -3,6 +3,7 @@ import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function LoginPage() {
   const {
@@ -11,7 +12,17 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const postRegisterUser = async (data)=>{
+    try {
+      await axios.post("http://localhost:3001/register", {data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onSubmit = (data) => {
+    postRegisterUser(data)
+  }
 
   return (
     <div className="main bg-customs shadow">
@@ -33,6 +44,7 @@ export default function LoginPage() {
                     id="nombre"
                     type="text"
                     size="lg"
+                    placeholder="Nombre"
                     {...register("nombre")}
                   />
                   <MDBInput
@@ -41,6 +53,7 @@ export default function LoginPage() {
                     id="email"
                     type="email"
                     size="lg"
+                    placeholder="Email"
                     {...register("email")}
                   />
                   <MDBInput
@@ -49,7 +62,17 @@ export default function LoginPage() {
                     id="direccion"
                     type="text"
                     size="lg"
+                    placeholder="Direccion"
                     {...register("direccion")}
+                  />
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Ciudad"
+                    id="ciudad"
+                    type="text"
+                    size="lg"
+                    placeholder="Ciudad"
+                    {...register("ciudad")}
                   />
                   <MDBInput
                     wrapperClass="mb-4"
@@ -57,7 +80,8 @@ export default function LoginPage() {
                     id="telefono"
                     type="number"
                     size="lg"
-                    {...register("direccion")}
+                    placeholder="Telefono"
+                    {...register("telefono")}
                   />
                   {errors.password && <p>This field is required</p>}
                   <MDBInput
@@ -66,6 +90,7 @@ export default function LoginPage() {
                     id="contraseña"
                     type="password"
                     size="lg"
+                    placeholder="Contrasena"
                     {...register("password", { required: true })}
                   />
                   <MDBInput
@@ -74,6 +99,7 @@ export default function LoginPage() {
                     id="confirmar-contraseña"
                     type="password"
                     size="lg"
+                    placeholder="confirma contrasena"
                     {...register("confirmar-password", { required: true })}
                   />
                   <div className="text-center text-md-start mt-4 pt-2">
