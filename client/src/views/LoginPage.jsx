@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
@@ -6,24 +6,40 @@ import { useForm } from "react-hook-form";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import Message from "../components/Message";
+import axios from "axios";
 
 export default function LoginPage() {
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const {isAuthenticated ,setIsAuthenticated} = useContext(DataContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(DataContext);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    if(data.email === "email@email.com" && data.password === "asdfg"){
+  const getUserLogin = async (data) => {
+    try {
+      const { email, password } = data;
+      const response = await axios.post("http://localhost:3001/login", { email, password })
+      console.log(response)
       setIsAuthenticated(true);
       setTimeout(() => {
         navigate("/");
       }, 2500)
+    } catch (error) {
+      console.log("Credenciales incorrectas")
     }
+
+  }
+
+  const onSubmit = (data) => {
+    getUserLogin(data);
+    /* if(data.email === "email@email.com" && data.password === "asdfg"){
+      ;
+      
+    } */
   };
 
   return (

@@ -1,10 +1,5 @@
 const pool = require("./server");
-
-const getUsers = async () => {
-    const query = "SELECT * FROM usuarios";
-    const { rows: user } = await pool.query(query);
-    return user
-};
+const bcrypt = require("bcryptjs");
 
 const getProducts = async () => {
     const query = "SELECT * FROM publicaciones";
@@ -19,8 +14,39 @@ const getReviews = async (id) => {
     return comentarios
 }
 
+const userLogin = async (email, password) => {
+    const values = [email];
+    const query = "SELECT * FROM usuarios WHERE email = $1";
+    const { rows: [usuario], rowCount } = await pool.query(query, values);
+    if (!usuario) {
+        throw { code: 401, message: "email invalido" };
+    } else {
+        const { contrasena: passwordEcripted } = usuario;
+        const passwordValided = bcrypt.compareSync(password, passwordEcripted);
+        console.log(password)
+        console.log(passwordEcripted)
+        if (passwordValided) {
+            return usuario
+        } else {
+            if (!passwordValided || !rowCount)
+                throw { code: 401, message: "email o contrasenha incorrecta" };
+        }
+    }
+}
+
+const createUser = async (nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro) => {
+    const passwordEcripted = bcrypt.hashSync(contrasena, 10);
+    contrasena = passwordEcripted;
+    const query = "INSERT INTO usuarios (nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+    const values = [nombre, email, passwordEcripted, direccion, ciudad, telefono, fecha_registro];
+    const { rows: userCreted } = await pool.query(query, values);
+    return userCreted;
+}
+
+
 module.exports = {
-    getUsers,
     getProducts,
-    getReviews
+    getReviews,
+    userLogin,
+    createUser
 }
