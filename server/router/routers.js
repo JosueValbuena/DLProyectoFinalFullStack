@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { getProducts, getReviews, createUser, userLogin, getFavoritos } = require("../consultas");
+const { getProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -43,6 +43,21 @@ router.post("/login", checkCredentiaslMiddleware, async (req, res) => {
     }
 })
 
+router.get("/user", async (req, res) => {
+    try {
+        const token = req.header("Authorization").split("Bearer ")[1];
+        const {email} = jwt.decode(token);
+        const usuario = await getUser(email);
+        if(usuario){
+            res.json(usuario);
+        } else {
+            res.status(404).json({error: "Usuario no encontrado"})
+        }
+    } catch (error) {
+        res.status(500).send({error: error.message});
+    }
+});
+
 router.post("/register", async (req, res) => {
     try {
         const { nombre, email, contrasena, direccion, ciudad, telefono, fecha_registro } = req.body;
@@ -55,17 +70,20 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.get("/profile", (req, res) => {
-    const { email, correo, contraseña } = req.body;
-    console.log(req.body);
-    res.json({ mensaje: "Get Profile" });
+router.get("/favoritos/usuario/:idUsuario", async (req, res) => {
+    const id_usuarios = req.params.idUsuario;
+    const favoritos = await getFavoritos(id_usuarios);
+    res.send(favoritos);
 });
 
-router.get("/usuarios/:idUsuario/favoritos/:idPublicacion", async (req, res) => {
-    const id_usuarios = req.params.idUsuario;
-    const id_publicacion = req.params.idPublicacion;
-    const favoritos = await getFavoritos(id_usuarios, id_publicacion);
-    res.send(favoritos);
+router.post("/favoritos", async (req, res) => {
+    try {
+        const { idUser, idProduct } = req.body;
+        await setFavoritos(idUser, idProduct);
+        return res.send("Datos agregados correctamente")   
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 module.exports = router;

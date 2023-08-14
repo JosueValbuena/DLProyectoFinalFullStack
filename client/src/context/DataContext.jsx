@@ -7,15 +7,17 @@ export const DataProvider = ({ children }) => {
     const [data, setData] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [user, setUser] = useState({});
+    const [favoritos, setFavoritos] = useState([]);
 
     const urlServer = "http://localhost:3001";
     const endpoints = {
         user: "/usuarios",
         publicaciones: "/publicaciones"
-        }
+    }
 
     const getData = async () => {
-        const query = await fetch(urlServer+endpoints.publicaciones);
+        const query = await fetch(urlServer + endpoints.publicaciones);
         const res = await query.json();
         setData(res);
     }
@@ -27,7 +29,13 @@ export const DataProvider = ({ children }) => {
     }, [])
 
     return (
-        <DataContext.Provider value={{ data, setData, shoppingCart, setShoppingCart, totalItems, isAuthenticated, setIsAuthenticated }}>
+        <DataContext.Provider value={{
+            data, setData,
+            shoppingCart, setShoppingCart, totalItems,
+            isAuthenticated, setIsAuthenticated,
+            user, setUser,
+            favoritos, setFavoritos
+        }}>
             {children}
         </DataContext.Provider>
     )
