@@ -112,6 +112,11 @@ html {
     aspect-ratio: 1/1;
 }
 
+.itemDetail-like{
+    display: flex;
+    justify-content: space-between;
+}
+
 .shoppingCart{
     display: flex;
     justify-content: space-around;

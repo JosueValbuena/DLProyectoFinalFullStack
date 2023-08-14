@@ -43,11 +43,32 @@ const createUser = async (nombre, email, contrasena, direccion, ciudad, telefono
     return userCreted;
 }
 
-const getFavoritos = async (id_usuarios, id_publicacion) => {
-    const query = "SELECT publicaciones.img, publicaciones.titulo, publicaciones.precio FROM publicaciones INNER JOIN favoritos ON publicaciones.id = favoritos.id_publicaciones INNER JOIN usuarios ON usuarios.id = favoritos.id_usuarios WHERE id_publicaciones = $2 and id_usuarios = $1"
-    const values = [id_usuarios, id_publicacion];
+const getFavoritos = async (id_usuarios) => {
+    const query = "SELECT publicaciones.img, publicaciones.titulo, publicaciones.precio FROM publicaciones INNER JOIN favoritos ON publicaciones.id = favoritos.id_publicaciones INNER JOIN usuarios ON usuarios.id = favoritos.id_usuarios WHERE id_usuarios = $1"
+    const values = [id_usuarios];
     const { rows: favoritos } = await pool.query(query, values);
     return favoritos
+}
+
+const getUser = async (email) => {
+    try {
+        const query = "SELECT id, nombre, email, direccion, ciudad, telefono FROM usuarios WHERE email = $1";
+        const values = [email];
+        const { rows: user } = await pool.query(query, values)
+        return user;
+    } catch (error) {
+        console.log("Error al obtener usuario")
+    }
+}
+
+const setFavoritos = async (idUser, idProduct) => {
+    try {
+        const query = "INSERT INTO favoritos VALUES(DEFAULT, $1, $2)";
+        const values = [idUser, idProduct];
+        const { rowCount } = await pool.query(query, values);
+    } catch (error) {
+        console.log("No se pudo agregar datos a la tabla")
+    }
 }
 
 
@@ -56,5 +77,7 @@ module.exports = {
     getReviews,
     userLogin,
     createUser,
-    getFavoritos
+    getFavoritos,
+    getUser,
+    setFavoritos
 }

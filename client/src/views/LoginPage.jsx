@@ -16,22 +16,35 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(DataContext);
+  const { isAuthenticated, setIsAuthenticated, user, setUser } = useContext(DataContext);
   const navigate = useNavigate();
+
+  const getUser = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const { data } = await axios.get("http://localhost:3001/user", {
+        headers: { Authorization: "Bearer " + token }
+      });
+      console.log(user);
+      setUser(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getUserLogin = async (data) => {
     try {
       const { email, password } = data;
       const response = await axios.post("http://localhost:3001/login", { email, password })
-      console.log(response)
       setIsAuthenticated(true);
+      localStorage.setItem("token", response.data)
+      await getUser();
       setTimeout(() => {
         navigate("/");
       }, 2500)
     } catch (error) {
       console.log("Credenciales incorrectas")
     }
-
   }
 
   const onSubmit = (data) => {

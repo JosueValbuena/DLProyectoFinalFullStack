@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+import axios from "axios";
 
 const ItemDetail = () => {
 
   const [comentarios, setComentarios] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [favoritos, setFavoritos] = useState(false);
+  const [favoritosBtn, setFavoritosBtn] = useState(false);
 
 
-  const { data, shoppingCart, setShoppingCart } = useContext(DataContext);
+  const { data, shoppingCart, setShoppingCart, user } = useContext(DataContext);
 
   const id = useParams();
 
@@ -48,8 +49,15 @@ const ItemDetail = () => {
     }
   };
 
+  const setProductoFavorito = async () => {
+    const idUser = user[0].id;
+    const idProduct = product.id;
+    await axios.post("http://localhost:3001/favoritos", { idUser, idProduct })
+  }
+
   const handleFavoritos = () => {
-    setFavoritos(!favoritos)
+    setFavoritosBtn(!favoritosBtn)
+    setProductoFavorito();
   }
 
   return (
@@ -64,11 +72,11 @@ const ItemDetail = () => {
           <button className="itemDetail-button" onClick={addSC}>
             Agregar al carrito
           </button>
-          <div onClick={handleFavoritos}>
-            {favoritos ? <div>
-          <p><i className="fa-sharp fa-solid fa-heart"></i></p>
-          <p>Añadido a favoritos</p>
-          </div> : <p><i className="fa-sharp fa-regular fa-heart"></i></p>}
+          <div className="itemDetail-like" onClick={handleFavoritos}>
+            {favoritosBtn ? <>
+              <p><i className="fa-sharp fa-solid fa-heart"></i></p>
+              <p>Añadido a favoritos</p>
+            </> : <p><i className="fa-sharp fa-regular fa-heart"></i></p>}
           </div>
         </div>
       </div>
