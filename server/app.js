@@ -22,9 +22,10 @@ app.post("/login", async (req, res) => {
       if (contrasena === rows[0].contrasena) {
         res.json(rows);
       } else {
-        res.json({ mensaje: "Contraseña Incorrecta" });
+        res.json({ mensaje: "bad" });
       }
     }
+    pool.end;
   } catch (error) {
     console.error("Error al loguearte:", error);
     res.status(500).json({ mensaje: "Error en el servidor" });

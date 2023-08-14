@@ -2,8 +2,9 @@ import React from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-
+import { Navigate } from "react-router-dom";
 export default function LoginPage() {
   const {
     register,
@@ -11,7 +12,27 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const navigate = Navigate();
+    const { nombre, email, direccion, ciudad, telefono, contrasena } = data;
+    try {
+      const response = await axios.post("http://localhost:3001/register", {
+        nombre,
+        email,
+        direccion,
+        ciudad,
+        telefono,
+        contrasena,
+      });
+
+      console.log("Respuesta del servidor:", response.data);
+      navigate("/login");
+      // Aquí puedes realizar acciones según la respuesta del servidor, como redireccionar o mostrar un mensaje de éxito.
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+      // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario.
+    }
+  };
 
   return (
     <div className="main bg-customs shadow">
@@ -53,11 +74,19 @@ export default function LoginPage() {
                   />
                   <MDBInput
                     wrapperClass="mb-4"
+                    label="Ciudad"
+                    id="ciudad"
+                    type="text"
+                    size="lg"
+                    {...register("ciudad")}
+                  />
+                  <MDBInput
+                    wrapperClass="mb-4"
                     label="Telefono"
                     id="telefono"
                     type="number"
                     size="lg"
-                    {...register("direccion")}
+                    {...register("telefono")}
                   />
                   {errors.password && <p>This field is required</p>}
                   <MDBInput
@@ -66,7 +95,7 @@ export default function LoginPage() {
                     id="contraseña"
                     type="password"
                     size="lg"
-                    {...register("password", { required: true })}
+                    {...register("contrasena", { required: true })}
                   />
                   <MDBInput
                     wrapperClass="mb-4"

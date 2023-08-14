@@ -1,8 +1,9 @@
-import React from "react";
+import { useContext } from "react";
 import Bolso from "../images/Bolso.jpeg";
 import R10BLANCA from "../images/R10BLANCA.jpg";
 import Lentes from "../images/Lentes.jpg";
 import Casco from "../images/Casco.jpg";
+import { Link } from "react-router-dom";
 import {
   MDBCol,
   MDBContainer,
@@ -14,8 +15,11 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { DataContext } from "../context/DataContext";
 
 export function ProfilePage() {
+  const { data } = useContext(DataContext);
+  console.log(data);
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#cdd3d5ff" }}>
       <MDBContainer className="py-5 h-100">
@@ -46,8 +50,7 @@ export function ProfilePage() {
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">Juan Carlos Fuenzalida</MDBTypography>
-                  <MDBCardText>Santiago de Chile</MDBCardText>
+                  <MDBTypography tag="h5">{data[0]?.nombre}</MDBTypography>
                 </div>
               </div>
               <div
@@ -55,9 +58,9 @@ export function ProfilePage() {
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="d-flex justify-content-end text-center py-1">
-                  <MDBCardText className="btn btn-primary me-5">
+                  <Link to="/profile-gallery" className="btn btn-primary me-5">
                     Mis Publicaciones
-                  </MDBCardText>
+                  </Link>
                   <div>
                     <MDBCardText className="mb-1 h5">25</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">
@@ -83,13 +86,16 @@ export function ProfilePage() {
                   <p className="lead fw-normal mb-1">Información</p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      Desarrollador Web
+                      Ciudad: {data[0]?.ciudad}
                     </MDBCardText>
                     <MDBCardText className="font-italic mb-1">
-                      Vive en Santiago de Chile
+                      Direccion: {data[0]?.direccion}
                     </MDBCardText>
-                    <MDBCardText className="font-italic mb-0">
-                      Ciclista Profesional
+                    <MDBCardText className="font-italic mb-1">
+                      Email: {data[0]?.email}
+                    </MDBCardText>
+                    <MDBCardText className="font-italic mb-1">
+                      Tlf: {data[0]?.telefono}
                     </MDBCardText>
                   </div>
                 </div>

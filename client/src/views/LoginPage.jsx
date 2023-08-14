@@ -1,19 +1,43 @@
-import React from "react";
+import { useContext } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
 import "./login.css";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { DataContext } from "../context/DataContext";
 
 export default function LoginPage() {
+  const { setData, setIsAuthenticated } = useContext(DataContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const { email, contrasena } = data;
+    try {
+      const response = await axios.post("http://localhost:3001/login", {
+        email,
+        contrasena,
+      });
+
+      console.log("Respuesta del servidor:", response.data);
+      if (response.data.mensaje === "bad") {
+        navigate("/login/");
+      } else {
+        setIsAuthenticated(true);
+        navigate("/user-profile/");
+        setData(response.data);
+      }
+      // Aquí puedes realizar acciones según la respuesta del servidor, como redireccionar o mostrar un mensaje de éxito.
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+      // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario.
+    }
+  };
 
   return (
     <div className="main bg-customs shadow">
@@ -45,7 +69,7 @@ export default function LoginPage() {
                     id="password"
                     type="password"
                     size="lg"
-                    {...register("password", { required: true })}
+                    {...register("contrasena", { required: true })}
                   />
                   <div className="text-center text-md-start mt-4 pt-2">
                     <button
