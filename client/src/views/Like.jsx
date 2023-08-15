@@ -4,14 +4,9 @@ import CardsLiked from '../components/CardsLiked';
 
 const Like = () => {
 
-  const { favoritos, setFavoritos, user } = useContext(DataContext);
+  const { favoritos, getFavoritos } = useContext(DataContext);
 
-  const getFavoritos = async () => {
-    const idUser = user[0].id;
-    const data = await fetch("http://localhost:3001/favoritos/usuario/" + idUser);
-    const res = await data.json();
-    setFavoritos(res);
-  }
+  
 
   useEffect(() => {
     getFavoritos()

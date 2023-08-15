@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { getProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser } = require("../consultas");
+const { getProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser, deleteFavoritos } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -46,15 +46,15 @@ router.post("/login", checkCredentiaslMiddleware, async (req, res) => {
 router.get("/user", async (req, res) => {
     try {
         const token = req.header("Authorization").split("Bearer ")[1];
-        const {email} = jwt.decode(token);
+        const { email } = jwt.decode(token);
         const usuario = await getUser(email);
-        if(usuario){
+        if (usuario) {
             res.json(usuario);
         } else {
-            res.status(404).json({error: "Usuario no encontrado"})
+            res.status(404).json({ error: "Usuario no encontrado" })
         }
     } catch (error) {
-        res.status(500).send({error: error.message});
+        res.status(500).send({ error: error.message });
     }
 });
 
@@ -80,10 +80,24 @@ router.post("/favoritos", async (req, res) => {
     try {
         const { idUser, idProduct } = req.body;
         await setFavoritos(idUser, idProduct);
-        return res.send("Datos agregados correctamente")   
+        return res.send("Datos agregados correctamente")
     } catch (error) {
         console.log(error)
     }
 });
+
+router.delete("/usuario/:idUser/publicacion/:idProduct", async (req, res) => {
+    try {
+        const { idUser, idProduct } = req.params;
+        console.log({
+            idUser: idUser,
+            idProduct: idProduct
+        })
+        await deleteFavoritos(idUser, idProduct);
+        return res.send("Datos eliminados correctamente correctamente")
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 module.exports = router;
