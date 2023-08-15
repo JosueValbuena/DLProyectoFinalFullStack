@@ -24,6 +24,13 @@ export const DataProvider = ({ children }) => {
 
     const totalItems = shoppingCart.map(ele => ele.qty).reduce((a, b) => a + b, 0);
 
+    const getFavoritos = async () => {
+        const idUser = user[0].id;
+        const data = await fetch("http://localhost:3001/favoritos/usuario/" + idUser);
+        const res = await data.json();
+        setFavoritos(res);
+    }
+
     useEffect(() => {
         getData()
     }, [])
@@ -34,7 +41,7 @@ export const DataProvider = ({ children }) => {
             shoppingCart, setShoppingCart, totalItems,
             isAuthenticated, setIsAuthenticated,
             user, setUser,
-            favoritos, setFavoritos
+            getFavoritos, favoritos, setFavoritos
         }}>
             {children}
         </DataContext.Provider>

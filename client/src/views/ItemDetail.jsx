@@ -10,7 +10,7 @@ const ItemDetail = () => {
   const [favoritosBtn, setFavoritosBtn] = useState(false);
 
 
-  const { data, shoppingCart, setShoppingCart, user } = useContext(DataContext);
+  const { data, shoppingCart, setShoppingCart, user, favoritos, setFavoritos, getFavoritos } = useContext(DataContext);
 
   const id = useParams();
 
@@ -22,8 +22,13 @@ const ItemDetail = () => {
   }
 
   useEffect(() => {
-    getComentarios()
+    getComentarios();
+    const isExist = favoritos.find(ele => ele.id === product.id);
+    isExist && setFavoritosBtn(true);
+    getFavoritos()
   }, [])
+
+
 
   const product = data.find((ele) => ele.id === Number(id.id));
 
@@ -55,9 +60,30 @@ const ItemDetail = () => {
     await axios.post("http://localhost:3001/favoritos", { idUser, idProduct })
   }
 
+  const deleteProductoFavaorito = async () => {
+    const idUser = user[0].id;
+    const idProduct = product.id;
+    console.log(idUser);
+    try {
+      const response = await axios.delete("http://localhost:3001/usuario/" + idUser + "/publicacion/" + idProduct);
+      console.log(response)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleFavoritos = () => {
-    setFavoritosBtn(!favoritosBtn)
-    setProductoFavorito();
+    const isExist = favoritos.find(ele => ele.id === product.id);
+    if (isExist) {
+      setFavoritosBtn(false)
+      deleteProductoFavaorito();
+      setFavoritos([]);
+      getFavoritos()
+    } else {
+      setFavoritosBtn(true)
+      setProductoFavorito();
+      getFavoritos()
+    }
   }
 
   return (

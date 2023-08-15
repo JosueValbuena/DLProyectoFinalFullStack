@@ -44,7 +44,7 @@ const createUser = async (nombre, email, contrasena, direccion, ciudad, telefono
 }
 
 const getFavoritos = async (id_usuarios) => {
-    const query = "SELECT publicaciones.img, publicaciones.titulo, publicaciones.precio FROM publicaciones INNER JOIN favoritos ON publicaciones.id = favoritos.id_publicaciones INNER JOIN usuarios ON usuarios.id = favoritos.id_usuarios WHERE id_usuarios = $1"
+    const query = "SELECT publicaciones.img, publicaciones.titulo, publicaciones.precio, publicaciones.id FROM publicaciones INNER JOIN favoritos ON publicaciones.id = favoritos.id_publicaciones INNER JOIN usuarios ON usuarios.id = favoritos.id_usuarios WHERE id_usuarios = $1"
     const values = [id_usuarios];
     const { rows: favoritos } = await pool.query(query, values);
     return favoritos
@@ -71,6 +71,15 @@ const setFavoritos = async (idUser, idProduct) => {
     }
 }
 
+const deleteFavoritos = async (idUser, idProduct) => {
+    try {
+        const query = "DELETE FROM favoritos WHERE id_usuarios = $1 AND id_publicaciones = $2";
+        const values = [idUser, idProduct];
+        const { rowCount } = await pool.query(query, values);
+    } catch (error) {
+        console.log("No se encontraron datos en la tabla")
+    }
+}
 
 module.exports = {
     getProducts,
@@ -79,5 +88,6 @@ module.exports = {
     createUser,
     getFavoritos,
     getUser,
-    setFavoritos
+    setFavoritos,
+    deleteFavoritos
 }
