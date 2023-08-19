@@ -18,6 +18,17 @@ const postProducts = async (id_usuario, titulo, descripcion, stock, precio, fech
     }
 }
 
+const getUserProducts = async (id_user) =>{
+    try {
+        const query = "SELECT * from publicaciones WHERE id_usuario = $1";
+        const values = [id_user];
+        const { rows: userProducts} = await pool.query(query, values);
+        return userProducts;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getReviews = async (id) => {
     const query = "SELECT * FROM comentarios WHERE id_publicacion = $1";
     const values = [id];
@@ -101,5 +112,6 @@ module.exports = {
     getUser,
     setFavoritos,
     deleteFavoritos,
-    postProducts
+    postProducts,
+    getUserProducts
 }

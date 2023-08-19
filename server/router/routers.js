@@ -2,7 +2,10 @@ const express = require("express");
 const router = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { getProducts, postProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser, deleteFavoritos } = require("../consultas");
+const { getProducts, postProducts, getReviews,
+    createUser, userLogin, getFavoritos,
+    setFavoritos, getUser, deleteFavoritos,
+    getUserProducts } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -11,7 +14,7 @@ router.use(express.json());
 router.use(cors());
 router.use(cors());
 
-//Rutas
+//Routes
 router.get("/publicaciones", async (req, res) => {
     try {
         const productos = await getProducts();
@@ -21,16 +24,26 @@ router.get("/publicaciones", async (req, res) => {
     }
 })
 
-router.post("/publicaciones", async(req, res) => {
+router.post("/publicaciones", async (req, res) => {
     try {
         const data = req.body;
         console.log(data);
-        const {id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img} = data;
+        const { id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img } = data;
         console.log(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img)
         const productos = await postProducts(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img);
-        res.json({datos:productos, message: "datos agregados correctamente"});
+        res.json({ datos: productos, message: "datos agregados correctamente" });
     } catch (error) {
-        console.log({error: error, message: "no se pudo agregar datos a PUBLICACIONES"})
+        console.log({ error: error, message: "no se pudo agregar datos a PUBLICACIONES" })
+    }
+})
+
+router.get("/publicaciones/usuario/:id_user", async (req, res) => {
+    try {
+        const {id_user} = req.params;
+        const userProducts = await getUserProducts(id_user);
+        res.json(userProducts);
+    } catch (error) {
+        console.log(error)
     }
 })
 
