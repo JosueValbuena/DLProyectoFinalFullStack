@@ -14,8 +14,12 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 export function ProfilePage() {
+
+  const navigate = useNavigate();
+
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#cdd3d5ff" }}>
       <MDBContainer className="py-5 h-100">
@@ -55,7 +59,7 @@ export function ProfilePage() {
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="d-flex justify-content-end text-center py-1">
-                  <MDBCardText className="btn btn-primary me-5">
+                  <MDBCardText onClick={() => navigate("/user-posts")} className="btn btn-primary me-5">
                     Mis Publicaciones
                   </MDBCardText>
                   <div>
