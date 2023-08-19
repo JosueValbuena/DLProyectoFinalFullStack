@@ -7,6 +7,17 @@ const getProducts = async () => {
     return products
 }
 
+const postProducts = async (id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img) => {
+    try {
+        const query = "INSERT INTO publicaciones(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img) VALUES ( $1, $2, $3, $4, $5, $6, $7)";
+        const values = [id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img];
+        const { rows: products } = await pool.query(query, values);
+        return products;
+    } catch (error) {
+        console.log({error: error, message:"ocurrio al ingresar los datos en la tabla PUBLICACIONES"});
+    }
+}
+
 const getReviews = async (id) => {
     const query = "SELECT * FROM comentarios WHERE id_publicacion = $1";
     const values = [id];
@@ -89,5 +100,6 @@ module.exports = {
     getFavoritos,
     getUser,
     setFavoritos,
-    deleteFavoritos
+    deleteFavoritos,
+    postProducts
 }

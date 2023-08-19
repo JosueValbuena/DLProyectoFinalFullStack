@@ -2,7 +2,7 @@ const express = require("express");
 const router = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { getProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser, deleteFavoritos } = require("../consultas");
+const { getProducts, postProducts, getReviews, createUser, userLogin, getFavoritos, setFavoritos, getUser, deleteFavoritos } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -18,6 +18,19 @@ router.get("/publicaciones", async (req, res) => {
         res.json(productos);
     } catch (error) {
         res.send(error)
+    }
+})
+
+router.post("/publicaciones", async(req, res) => {
+    try {
+        const data = req.body;
+        console.log(data);
+        const {id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img} = data;
+        console.log(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img)
+        const productos = await postProducts(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img);
+        res.json({datos:productos, message: "datos agregados correctamente"});
+    } catch (error) {
+        console.log({error: error, message: "no se pudo agregar datos a PUBLICACIONES"})
     }
 })
 
