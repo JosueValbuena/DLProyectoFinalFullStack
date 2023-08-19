@@ -1,33 +1,49 @@
 import React, { useState, useContext } from "react";
 import { DataContext } from "../context/DataContext";
+import axios from "axios";
 
 
 const PublicarProducto = () => {
-    const { setData } = useContext(DataContext);
+    const { user, getData } = useContext(DataContext);
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [categories, setCategories] = useState("");
+    const [stock, setStock] = useState("");
     const [price, setPrice] = useState(0);
     const [imageUrl, setImageUrl] = useState("");
+    const [product, setProduct] = useState({});
 
-    const handleSubmit = (e) => {
+    const postProduct = async () => {
+        try {
+            const res = await axios.post("http://localhost:3001/publicaciones", product);
+            console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const idUser = user[0].id;
         // logica para guardar el producto en la BD
         const newProduct = {
-            title,
-            description,
-            categories: categories.split(",").map((category) => category.trim()),
+            id_usuario: idUser,
+            titulo: title,
+            descripcion: description,
+            stock: stock,
             price: parseFloat(price),
-            imageUrl,
+            fecha_publicacion: "2023-05-20",
+            img: imageUrl,
         };
-        setData((prevData) => [...prevData, newProduct]);
+        setProduct(newProduct);
         // Limpia los campos después de enviar el formulario.
         setTitle("");
         setDescription("");
-        setCategories("");
+        setStock("");
         setPrice(0);
         setImageUrl("");
+        await postProduct();
+        await getData();
     };
 
     return (
@@ -62,13 +78,13 @@ const PublicarProducto = () => {
                             ></textarea>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="categories">Categorías (separadas por comas)</label>
+                            <label htmlFor="categories">Stock</label>
                             <input
-                                type="text"
+                                type="number"
                                 className="form-control"
-                                id="categories"
-                                value={categories}
-                                onChange={(e) => setCategories(e.target.value)}
+                                id="stock"
+                                value={stock}
+                                onChange={(e) => setStock(e.target.value)}
                                 required
                             />
                         </div>
