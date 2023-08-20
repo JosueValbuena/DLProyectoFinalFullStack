@@ -2,9 +2,15 @@ import React, { useContext } from 'react'
 import { DataContext } from '../context/DataContext';
 import CardsHome from '../components/CardsHome';
 import SliderHome from '../components/SliderHome';
+import { useEffect } from 'react';
 
 const Home = () => {
-    const { data } = useContext(DataContext);
+    const { data, getData } = useContext(DataContext);
+
+    useEffect(() => {
+      getData()
+    }, [])
+    
 
     return (
         <div>

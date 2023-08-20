@@ -37,7 +37,7 @@ export const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={{
-            data, setData,
+            data, setData, getData,
             shoppingCart, setShoppingCart, totalItems,
             isAuthenticated, setIsAuthenticated,
             user, setUser,
