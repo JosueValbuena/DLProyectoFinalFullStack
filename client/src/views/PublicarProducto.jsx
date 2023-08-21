@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import axios from "axios";
 
@@ -22,27 +22,36 @@ const PublicarProducto = () => {
         }
     }
 
+    useEffect(() => {
+        if (Object.keys(product).length !== 0) {
+            postProduct();
+            setTitle("");
+            setDescription("");
+            setStock("");
+            setPrice(0);
+            setImageUrl("");
+        }
+    }, [product]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const idUser = user[0].id;
-        // logica para guardar el producto en la BD
+
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
         const newProduct = {
             id_usuario: idUser,
             titulo: title,
             descripcion: description,
             stock: stock,
-            price: parseFloat(price),
-            fecha_publicacion: "2023-05-20",
+            precio: parseFloat(price),
+            fecha_publicacion: formattedDate,
             img: imageUrl,
         };
+
         setProduct(newProduct);
-        // Limpia los campos después de enviar el formulario.
-        setTitle("");
-        setDescription("");
-        setStock("");
-        setPrice(0);
-        setImageUrl("");
-        await postProduct();
+
         await getData();
     };
 
