@@ -149,3 +149,14 @@ html {
     aspect-ratio: 1/1;
     margin: 1.5rem 3rem;
 }
+
+.editItem-form{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.editItem-form *{
+    display: flex;
+    flex-direction: column;
+}

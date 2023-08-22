@@ -10,7 +10,7 @@ const CardsProfile = ({data}) => {
 
   const handleEdit = (event) => {
     event.stopPropagation();
-    console.log('Edit product with ID:', data.id);
+    navigate(`/item-edit/${data.id}`);
   }
 
   return (

@@ -36,6 +36,17 @@ const getUserProducts = async (id_user) =>{
     }
 }
 
+const getEditProduct = async (userId, itemId) => {
+    try {
+        const query = "SELECT * FROM publicaciones WHERE id = $2 AND id_usuario = $1";
+        const values = [userId, itemId];
+        const { rows: edictProduct } = await pool.query(query, values);
+        return edictProduct
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getReviews = async (id) => {
     const query = "SELECT * FROM comentarios WHERE id_publicacion = $1";
     const values = [id];
@@ -120,5 +131,6 @@ module.exports = {
     setFavoritos,
     deleteFavoritos,
     postProducts,
-    getUserProducts
+    getUserProducts,
+    getEditProduct
 }
