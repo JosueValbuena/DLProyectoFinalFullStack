@@ -9,10 +9,17 @@ const getProducts = async () => {
 
 const postProducts = async (id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img) => {
     try {
-        const query = "INSERT INTO publicaciones(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img) VALUES ( $1, $2, $3, $4, $5, $6, $7)";
-        const values = [id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img];
-        const { rows: products } = await pool.query(query, values);
-        return products;
+        const query = "INSERT INTO publicaciones(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
+        const values = [id_usuario, titulo, descripcion, stock, precio, fecha_publicacion];
+        
+        const result = await pool.query(query, values);
+        const publicacionId = result.rows[0].id;
+
+        const imagenQuery = "INSERT INTO Imagenes(id_publicacion, url) VALUES ($1, $2)";
+        const imagenValues = [publicacionId, img];
+        await pool.query(imagenQuery, imagenValues);
+
+        return result.rows;
     } catch (error) {
         console.log({error: error, message:"ocurrio al ingresar los datos en la tabla PUBLICACIONES"});
     }

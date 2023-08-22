@@ -12,7 +12,6 @@ require("dotenv").config();
 // Middleware
 router.use(express.json());
 router.use(cors());
-router.use(cors());
 
 //Routes
 router.get("/publicaciones", async (req, res) => {
@@ -28,8 +27,7 @@ router.post("/publicaciones", async (req, res) => {
     try {
         const data = req.body;
         console.log(data);
-        const { id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img } = data;
-        console.log(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img)
+        
         const productos = await postProducts(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img);
         res.json({ datos: productos, message: "datos agregados correctamente" });
     } catch (error) {
