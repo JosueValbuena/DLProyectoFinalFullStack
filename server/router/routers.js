@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { getProducts, postProducts, getReviews,
     createUser, userLogin, getFavoritos,
     setFavoritos, getUser, deleteFavoritos,
-    getUserProducts } = require("../consultas");
+    getUserProducts, getEditProduct } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -44,6 +44,16 @@ router.get("/publicaciones/usuario/:id_user", async (req, res) => {
         res.json(userProducts);
     } catch (error) {
         console.log(error)
+    }
+})
+
+router.get("/usuario/:userId/publicacion/:itemId", async (req, res) => {
+    try {
+        const {userId, itemId} = req.params;
+        const edictProduct = await getEditProduct(userId, itemId)
+        res.json(edictProduct);
+    } catch (error) {
+        res.send(error)
     }
 })
 
@@ -115,10 +125,6 @@ router.post("/favoritos", async (req, res) => {
 router.delete("/usuario/:idUser/publicacion/:idProduct", async (req, res) => {
     try {
         const { idUser, idProduct } = req.params;
-        console.log({
-            idUser: idUser,
-            idProduct: idProduct
-        })
         await deleteFavoritos(idUser, idProduct);
         return res.send("Datos eliminados correctamente correctamente")
     } catch (error) {
