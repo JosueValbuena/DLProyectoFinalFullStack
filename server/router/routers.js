@@ -13,7 +13,6 @@ require("dotenv").config();
 // Middleware
 router.use(express.json());
 router.use(cors());
-router.use(cors());
 
 //Routes
 router.get("/publicaciones", async (req, res) => {
