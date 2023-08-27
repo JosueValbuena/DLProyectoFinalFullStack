@@ -15,7 +15,7 @@ const PublicarProducto = () => {
 
     const postProduct = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/publicaciones", product);
+            const res = await axios.post("http://localhost:3001/publicaciones", {data: product});
             console.log(res);
         } catch (error) {
             console.log(error)

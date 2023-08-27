@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Bolso from "../images/Bolso.jpeg";
 import R10BLANCA from "../images/R10BLANCA.jpg";
 import Lentes from "../images/Lentes.jpg";
@@ -15,9 +15,11 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../context/DataContext";
 
 export function ProfilePage() {
 
+  const {user} = useContext(DataContext);
   const navigate = useNavigate();
 
   return (
@@ -50,8 +52,8 @@ export function ProfilePage() {
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">Juan Carlos Fuenzalida</MDBTypography>
-                  <MDBCardText>Santiago de Chile</MDBCardText>
+                  <MDBTypography tag="h5">{user[0].nombre.charAt(0).toUpperCase()+user[0].nombre.slice(1)}</MDBTypography>
+                  <MDBCardText>{user[0].direccion.charAt(0).toUpperCase()+user[0].direccion.slice(1)}</MDBCardText>
                 </div>
               </div>
               <div
@@ -87,13 +89,10 @@ export function ProfilePage() {
                   <p className="lead fw-normal mb-1">Información</p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      Desarrollador Web
-                    </MDBCardText>
-                    <MDBCardText className="font-italic mb-1">
-                      Vive en Santiago de Chile
+                      Email: {user[0].email}
                     </MDBCardText>
                     <MDBCardText className="font-italic mb-0">
-                      Ciclista Profesional
+                      Telefono: {user[0].telefono}
                     </MDBCardText>
                   </div>
                 </div>

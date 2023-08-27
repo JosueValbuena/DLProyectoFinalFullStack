@@ -7,6 +7,17 @@ const getProducts = async () => {
     return products
 }
 
+const deleteProduct = async (itemId) => {
+    try {
+        const query = "Delete FROM publicaciones WHERE id = $1";
+        const values = [itemId]
+        const result = await pool.query(query, values)
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const postProducts = async (id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img) => {
     try {
         const query = "INSERT INTO publicaciones(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
@@ -21,15 +32,15 @@ const postProducts = async (id_usuario, titulo, descripcion, stock, precio, fech
 
         return result.rows;
     } catch (error) {
-        console.log({error: error, message:"ocurrio al ingresar los datos en la tabla PUBLICACIONES"});
+        console.log({ error: error, message: "ocurrio al ingresar los datos en la tabla PUBLICACIONES" });
     }
 }
 
-const getUserProducts = async (id_user) =>{
+const getUserProducts = async (id_user) => {
     try {
         const query = "SELECT * from publicaciones WHERE id_usuario = $1";
         const values = [id_user];
-        const { rows: userProducts} = await pool.query(query, values);
+        const { rows: userProducts } = await pool.query(query, values);
         return userProducts;
     } catch (error) {
         console.log(error)
@@ -47,11 +58,33 @@ const getEditProduct = async (userId, itemId) => {
     }
 }
 
+const putEdictProduct = async (userId, itemId, titulo, descripcion, stock, precio, url) => {
+    try {
+        const query = "UPDATE publicaciones SET titulo = $3, descripcion = $4, stock = $5, precio = $6, img = $7 WHERE id = $2 AND id_usuario = $1"
+        const values = [userId, itemId, titulo, descripcion, stock, precio, url]
+        const { rows: newPorduct } = await pool.query(query, values);
+        return newPorduct;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getReviews = async (id) => {
-    const query = "SELECT * FROM comentarios WHERE id_publicacion = $1";
+    const query = "SELECT usuarios.nombre, comentarios.contenido FROM comentarios INNER JOIN usuarios ON comentarios.id_usuario = usuarios.id  WHERE id_publicacion = $1";
     const values = [id];
     const { rows: comentarios } = await pool.query(query, values);
     return comentarios
+}
+
+const postReviews = async (itemId, userId, comentario) => {
+    try {
+        const query = "INSERT INTO comentarios (id_publicacion, id_usuario, contenido) VALUES($1, $2, $3)"
+        const values = [itemId, userId, comentario];
+        const { rows: review } = await pool.query(query, values);
+        return review
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const userLogin = async (email, password) => {
@@ -132,5 +165,8 @@ module.exports = {
     deleteFavoritos,
     postProducts,
     getUserProducts,
-    getEditProduct
+    getEditProduct,
+    putEdictProduct,
+    postReviews,
+    deleteProduct
 }

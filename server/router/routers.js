@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 const { getProducts, postProducts, getReviews,
     createUser, userLogin, getFavoritos,
     setFavoritos, getUser, deleteFavoritos,
-    getUserProducts, getEditProduct } = require("../consultas");
+    getUserProducts, getEditProduct, putEdictProduct,
+    postReviews, deleteProduct } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -25,9 +26,9 @@ router.get("/publicaciones", async (req, res) => {
 
 router.post("/publicaciones", async (req, res) => {
     try {
-        const data = req.body;
-        console.log(data);
-        
+        const {data} = req.body;
+        const { id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img } = data;
+        console.log(id_usuario)
         const productos = await postProducts(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img);
         res.json({ datos: productos, message: "datos agregados correctamente" });
     } catch (error) {
@@ -55,11 +56,41 @@ router.get("/usuario/:userId/publicacion/:itemId", async (req, res) => {
     }
 })
 
+router.put("/usuario/:userId/publicacion/:itemId", async (req, res) => {
+    try {
+        const {userId, itemId} = req.params;
+        const {titulo, descripcion, stock, precio, url} = req.body;
+        const edictProduct = putEdictProduct(userId, itemId, titulo, descripcion, stock, precio, url);
+        res.json(edictProduct);
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.delete("/publicaciones/:itemId", async(req, res) => {
+    try {
+        const {itemId} = req.params
+        await deleteProduct(itemId);
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 router.get("/comentarios/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const comentarios = await getReviews(id);
         res.send(comentarios)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+router.post("/comentarios/:itemId", async(req, res) => {
+    try {
+        const {itemId} = req.params;
+        const {userId, comentario} = req.body;
+        postReviews(itemId, userId, comentario);
     } catch (error) {
         res.send(error)
     }
