@@ -1,10 +1,11 @@
 import React from "react";
 import { CDBBtn, CDBIcon, CDBBox } from "cdbreact";
 import logo from "../images/logo.png";
+import "../views/login.css";
 
 export const Footer = () => {
   return (
-    <div className="shadow" style={{ background: "#220c10ff" }}>
+    <div className="shadow bg-footer">
       <CDBBox
         display="flex"
         justifyContent="between"

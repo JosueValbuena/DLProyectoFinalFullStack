@@ -32,6 +32,10 @@ html {
     margin: 0 0.25rem;
 }
 
+#li-logut{
+    color: red;
+}
+
 .active {
     color: #77CBB9;
 }
@@ -108,6 +112,18 @@ html {
     aspect-ratio: 1/1;
 }
 
+.itemDetail-like{
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemDetail-review{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    margin: 1rem 0;
+}
+
 .shoppingCart{
     display: flex;
     justify-content: space-around;
@@ -139,4 +155,15 @@ html {
     width: 10rem;
     aspect-ratio: 1/1;
     margin: 1.5rem 3rem;
+}
+
+.editItem-form{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.editItem-form *{
+    display: flex;
+    flex-direction: column;
 }

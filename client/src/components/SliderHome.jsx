@@ -8,6 +8,7 @@ import 'swiper/css';
 
 
 const SliderHome = ({ data }) => {
+
     return (
             <div className='home-promoted'>
                 <h3>LO MAS VENDIDO!!!</h3>
