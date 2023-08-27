@@ -15,7 +15,7 @@ const SliderHome = ({ data }) => {
                 <div className='home-promotedCards'>
                 <Swiper
                 spaceBetween={1}
-                slidesPerView={1} 
+                slidesPerView={5} 
             >
                     {data.map((ele) => {
                         return (

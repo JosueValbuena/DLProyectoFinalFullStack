@@ -8,6 +8,7 @@ const ItemDetail = () => {
   const [comentarios, setComentarios] = useState([]);
   const [loader, setLoader] = useState(true);
   const [favoritosBtn, setFavoritosBtn] = useState(false);
+  const [comentario, setComentario] = useState('')
 
 
   const { data, shoppingCart, setShoppingCart, user, favoritos, setFavoritos, getFavoritos } = useContext(DataContext);
@@ -15,7 +16,7 @@ const ItemDetail = () => {
   const id = useParams();
 
   const getComentarios = async () => {
-    const data = await fetch("http://localhost:3001/comentarios/" + id.id);
+    const data = await fetch(`http://localhost:3001/comentarios/${id.id}`);
     const res = await data.json();
     setLoader(false);
     setComentarios(res)
@@ -25,19 +26,18 @@ const ItemDetail = () => {
     getComentarios();
     const isExist = favoritos.find(ele => ele.id === product.id);
     isExist && setFavoritosBtn(true);
-    getFavoritos()
-  }, [])
-
-
+    user.length > 0 && getFavoritos()
+  }, [comentarios])
 
   const product = data.find((ele) => ele.id === Number(id.id));
 
   const toSCAdd = {
     id: product.id,
-    url: product.url,
-    title: product.title,
-    description: product.description,
-    price: product.price,
+    img: product.img,
+    titulo: product.titulo,
+    descripcion: product.descripcion,
+    precio: product.precio,
+    stock: product.stock,
     qty: 1,
   };
 
@@ -63,10 +63,8 @@ const ItemDetail = () => {
   const deleteProductoFavaorito = async () => {
     const idUser = user[0].id;
     const idProduct = product.id;
-    console.log(idUser);
     try {
-      const response = await axios.delete("http://localhost:3001/usuario/" + idUser + "/publicacion/" + idProduct);
-      console.log(response)
+      await axios.delete("http://localhost:3001/usuario/" + idUser + "/publicacion/" + idProduct);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +84,20 @@ const ItemDetail = () => {
     }
   }
 
+  const handleSubmint = (e) => {
+    e.preventDefault();
+    const postComentario = async () => {
+      try {
+        const itemId = product.id;
+        const userId = user[0].id;
+        await axios.post(`http://localhost:3001/comentarios/${itemId}`, { userId: userId, comentario: comentario })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    postComentario();
+  }
+
   return (
     <div>
       <div className="itemDetail">
@@ -98,7 +110,7 @@ const ItemDetail = () => {
           <button className="itemDetail-button" onClick={addSC}>
             Agregar al carrito
           </button>
-          <div className="itemDetail-like" onClick={handleFavoritos}>
+          <div className="itemDetail-like" onClick={user.length > 0 ? handleFavoritos : undefined}>
             {favoritosBtn ? <>
               <p><i className="fa-sharp fa-solid fa-heart"></i></p>
               <p>Añadido a favoritos</p>
@@ -107,15 +119,28 @@ const ItemDetail = () => {
         </div>
       </div>
 
+      <div>
+        {user.length > 0 ?
+          <>
+            {product.id_usuario === user[0].id ?
+              undefined :
+              <form className="itemDetail-review" onSubmit={handleSubmint}>
+                <label for="comentario">Agrega tu comentario:</label>
+                <textarea rows="4" id="comentario" onChange={(e) => setComentario(e.target.value)} />
+                <button type="submint">Enviar comentario</button>
+              </form>}
+          </> : undefined}
+      </div>
+
       {loader ? "cargando" : <div>
         <div>
-          <h4>Comentarios {comentarios.length > 0 ? comentarios.length : <span>"Todavia no hay comentarios"</span>}</h4>
+          <h4>Comentarios: {comentarios.length > 0 ? comentarios.length : <span>"Todavia no hay comentarios"</span>}</h4>
           <div>
             {comentarios.map(ele => {
               return (
                 <div key={ele.id}>
-                  <p><span style={{ fontWeight: "bold" }}>De:</span> {ele.id_usuario}</p>
-                  <p>{ele.contenido}</p>
+                  <p><span style={{ fontWeight: "bold" }}>De:</span> {ele.nombre}</p>
+                  <p><span style={{ fontWeight: "bold" }}>Comentario:</span> {ele.contenido}</p>
                 </div>
               )
             })}

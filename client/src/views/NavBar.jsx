@@ -20,9 +20,9 @@ const NavBar = () => {
           <NavLink to="/" className="li">
             Inicio
           </NavLink>
-          <NavLink to="/categoria/categoriaDos" className="li">
+          {/* <NavLink to="/categoria/categoriaDos" className="li">
             Categorias
-          </NavLink>
+          </NavLink> */}
           {isAuthenticated ? (
             <NavLink to="/user-profile" className="li">
               Perfil
@@ -39,7 +39,7 @@ const NavBar = () => {
           )}
           {isAuthenticated && (
             <NavLink to="/post-product" className="li">
-              Publicar Porducto
+              Publicar Producto
             </NavLink>
           )}
           {isAuthenticated ? (

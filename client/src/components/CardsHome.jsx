@@ -13,10 +13,11 @@ const CardsHome = ({ data }) => {
 
   const toSCAdd = {
     id: data.id,
-    url: data.url,
-    title: data.title,
-    description: data.description,
-    price: data.price,
+    img: data.img,
+    titulo: data.titulo,
+    descripcion: data.descripcion,
+    precio: data.precio,
+    stock: data.stock,
     qty: 1,
   };
 

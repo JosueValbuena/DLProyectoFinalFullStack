@@ -16,7 +16,7 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const { isAuthenticated, setIsAuthenticated, user, setUser } = useContext(DataContext);
+  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(DataContext);
   const navigate = useNavigate();
 
   const getUser = async () => {
@@ -25,7 +25,6 @@ export default function LoginPage() {
       const { data } = await axios.get("http://localhost:3001/user", {
         headers: { Authorization: "Bearer " + token }
       });
-      console.log(user);
       setUser(data);
     } catch (error) {
       console.log(error)

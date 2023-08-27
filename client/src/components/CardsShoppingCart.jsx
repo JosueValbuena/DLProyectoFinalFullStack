@@ -15,8 +15,6 @@ const CardsShoppingCart = ({ data }) => {
         setShoppingCart([...lessProduct]);
     }
 
-    console.log(data)
-
     return (
         <div className='cardSC'>
             <div className='cardSC-left'>
@@ -30,9 +28,9 @@ const CardsShoppingCart = ({ data }) => {
                 </div>
             </div>
             <div className='cardSC-right'>
-                <button onClick={lessQty}>-</button>
+                <button disabled={data.qty <= 1} onClick={lessQty}>-</button>
                 <p>{data.qty}</p>
-                <button onClick={plusQty}>+</button>
+                <button disabled={data.qty >= data.stock} onClick={plusQty}>+</button>
             </div>
         </div>
     )

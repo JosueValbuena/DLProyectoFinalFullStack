@@ -10,7 +10,6 @@ const Home = () => {
     useEffect(() => {
       getData()
     }, [])
-    
 
     return (
         <div>
