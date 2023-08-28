@@ -22,7 +22,7 @@ export default function LoginPage() {
   const getUser = async () => {
     const token = localStorage.getItem("token");
     try {
-      const { data } = await axios.get("http://localhost:3001/user", {
+      const { data } = await axios.get("https://bicimarketplace.onrender.com/user", {
         headers: { Authorization: "Bearer " + token }
       });
       setUser(data);
@@ -34,7 +34,7 @@ export default function LoginPage() {
   const getUserLogin = async (data) => {
     try {
       const { email, password } = data;
-      const response = await axios.post("http://localhost:3001/login", { email, password })
+      const response = await axios.post("https://bicimarketplace.onrender.com/login", { email, password })
       setIsAuthenticated(true);
       localStorage.setItem("token", response.data)
       await getUser();
