@@ -12,7 +12,7 @@ const Home = () => {
     const { data, getData } = useContext(DataContext);
 
     const getProdutcsPromoted = async () => {
-        const data = await axios.get("http://localhost:3001/publicacionesPromoted");
+        const data = await axios.get("https://bicimarketplace.onrender.com/publicacionesPromoted");
         setDataPromoted(data.data);
     }
 
