@@ -57,14 +57,14 @@ const ItemDetail = () => {
   const setProductoFavorito = async () => {
     const idUser = user[0].id;
     const idProduct = product.id;
-    await axios.post("http://localhost:3001/favoritos", { idUser, idProduct })
+    await axios.post("https://bicimarketplace.onrender.com/favoritos", { idUser, idProduct })
   }
 
   const deleteProductoFavaorito = async () => {
     const idUser = user[0].id;
     const idProduct = product.id;
     try {
-      await axios.delete("http://localhost:3001/usuario/" + idUser + "/publicacion/" + idProduct);
+      await axios.delete("https://bicimarketplace.onrender.com/usuario/" + idUser + "/publicacion/" + idProduct);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +90,7 @@ const ItemDetail = () => {
       try {
         const itemId = product.id;
         const userId = user[0].id;
-        await axios.post(`http://localhost:3001/comentarios/${itemId}`, { userId: userId, comentario: comentario })
+        await axios.post(`https://bicimarketplace.onrender.com/comentarios/${itemId}`, { userId: userId, comentario: comentario })
       } catch (error) {
         console.log(error);
       }
