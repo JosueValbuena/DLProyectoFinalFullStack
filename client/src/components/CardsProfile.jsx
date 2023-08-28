@@ -20,7 +20,7 @@ const CardsProfile = ({ data, getUserProducts }) => {
     const deleteItem = async () => {
       const itemId = data.id;
       try {
-        await axios.delete(`http://localhost:3001/publicaciones/${itemId}`)
+        await axios.delete(`https://bicimarketplace.onrender.com/publicaciones/${itemId}`)
       } catch (error) {
         console.log(error)
       }
