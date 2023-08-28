@@ -15,7 +15,7 @@ const PublicarProducto = () => {
 
     const postProduct = async () => {
         try {
-            const res = await axios.post("http://localhost:3001/publicaciones", {data: product});
+            const res = await axios.post("https://bicimarketplace.onrender.com/publicaciones", {data: product});
             console.log(res);
         } catch (error) {
             console.log(error)
