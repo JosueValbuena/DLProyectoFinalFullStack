@@ -28,7 +28,6 @@ router.post("/publicaciones", async (req, res) => {
     try {
         const {data} = req.body;
         const { id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img } = data;
-        console.log(id_usuario)
         const productos = await postProducts(id_usuario, titulo, descripcion, stock, precio, fecha_publicacion, img);
         res.json({ datos: productos, message: "datos agregados correctamente" });
     } catch (error) {
