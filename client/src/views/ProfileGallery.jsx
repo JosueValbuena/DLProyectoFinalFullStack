@@ -13,7 +13,7 @@ const ProfileGallery = () => {
     const getUserProducts = async () => {
         try {
             const id_user = user[0].id;
-            const data = await fetch("http://localhost:3001/publicaciones/usuario/" + id_user);
+            const data = await fetch("https://bicimarketplace.onrender.com/publicaciones/usuario/" + id_user);
             const res = await data.json();
             setProductsuser(res);
         } catch (error) {
