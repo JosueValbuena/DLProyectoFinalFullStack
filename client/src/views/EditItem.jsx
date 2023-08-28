@@ -21,7 +21,7 @@ const EditItem = () => {
 
     const getProduct = async () => {
         const userId = user[0].id;
-        const data = await fetch(`http://localhost:3001/usuario/${userId}/publicacion/${itemId}`);
+        const data = await fetch(`https://bicimarketplace.onrender.com/usuario/${userId}/publicacion/${itemId}`);
         const res = await data.json();
         setProductEdit(res);
     }
@@ -42,7 +42,7 @@ const EditItem = () => {
     const updateProduct = async () => {
         try {
             const userId = user[0].id;
-            const query = await axios.put(`http://localhost:3001/usuario/${userId}/publicacion/${itemId}`,
+            const query = await axios.put(`https://bicimarketplace.onrender.com/usuario/${userId}/publicacion/${itemId}`,
                 { titulo: titulo, descripcion: descripcion, stock: stock, precio: precio, url: url });
             query.status && setMessage(true);
         } catch (error) {
