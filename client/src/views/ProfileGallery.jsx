@@ -36,7 +36,7 @@ const ProfileGallery = () => {
             <div className='home'>
                 {productsUser.map((ele) => {
                     return (
-                        <CardsProfile key={ele.id} data={ele} getUserProducts={getUserProducts}/>
+                        <CardsProfile key={ele.id} data={ele} />
                     )
                 })}
             </div>

@@ -7,6 +7,12 @@ const getProducts = async () => {
     return products
 }
 
+const getPromotedProducts = async () => {
+    const query = "SELECT * from publicaciones LIMIT 7";
+    const {rows: products} = await pool.query(query);
+    return products;
+}
+
 const deleteProduct = async (itemId) => {
     try {
         const query = "Delete FROM publicaciones WHERE id = $1";
@@ -160,5 +166,6 @@ module.exports = {
     getEditProduct,
     putEdictProduct,
     postReviews,
-    deleteProduct
+    deleteProduct,
+    getPromotedProducts
 }

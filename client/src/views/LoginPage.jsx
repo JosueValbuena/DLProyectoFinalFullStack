@@ -40,7 +40,7 @@ export default function LoginPage() {
       await getUser();
       setTimeout(() => {
         navigate("/");
-      }, 2500)
+      }, 1500)
     } catch (error) {
       console.log("Credenciales incorrectas")
     }

@@ -6,7 +6,7 @@ const { getProducts, postProducts, getReviews,
     createUser, userLogin, getFavoritos,
     setFavoritos, getUser, deleteFavoritos,
     getUserProducts, getEditProduct, putEdictProduct,
-    postReviews, deleteProduct } = require("../consultas");
+    postReviews, deleteProduct, getPromotedProducts } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
 require("dotenv").config();
 
@@ -19,6 +19,15 @@ router.get("/publicaciones", async (req, res) => {
     try {
         const productos = await getProducts();
         res.json(productos);
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+router.get("/publicacionesPromoted", async (req, res) => {
+    try {
+        const produtcs = await getPromotedProducts();
+        res.json(produtcs);
     } catch (error) {
         res.send(error)
     }
