@@ -8,6 +8,7 @@ const { getProducts, postProducts, getReviews,
     getUserProducts, getEditProduct, putEdictProduct,
     postReviews, deleteProduct, getPromotedProducts } = require("../consultas");
 const checkCredentiaslMiddleware = require("../middlewares/middlewares");
+const secretkey = process.env.SECRET_KEY;
 require("dotenv").config();
 
 // Middleware
@@ -109,10 +110,10 @@ router.post("/login", checkCredentiaslMiddleware, async (req, res) => {
         const user = req.body;
         const { email, password } = user;
         await userLogin(email, password);
-        const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: "1h" });
+        const token = jwt.sign({ email }, secretkey, { expiresIn: "1h" });
         res.send(token);
     } catch (error) {
-        res.status(error.code || 500).send({ error });
+        res.status(error.code || 500).send({ message: "Error during login", details: error.message });
     }
 })
 
