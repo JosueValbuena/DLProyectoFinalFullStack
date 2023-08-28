@@ -16,7 +16,7 @@ const ItemDetail = () => {
   const id = useParams();
 
   const getComentarios = async () => {
-    const data = await fetch(`http://localhost:3001/comentarios/${id.id}`);
+    const data = await fetch(`https://bicimarketplace.onrender.com/comentarios/${id.id}`);
     const res = await data.json();
     setLoader(false);
     setComentarios(res)
