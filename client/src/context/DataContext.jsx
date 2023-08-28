@@ -10,7 +10,7 @@ export const DataProvider = ({ children }) => {
     const [user, setUser] = useState({});
     const [favoritos, setFavoritos] = useState([]);
 
-    const urlServer = "http://localhost:3001";
+    const urlServer = "https://bicimarketplace.onrender.com";
     const endpoints = {
         user: "/usuarios",
         publicaciones: "/publicaciones"
@@ -26,7 +26,7 @@ export const DataProvider = ({ children }) => {
 
     const getFavoritos = async () => {
         const idUser = user[0].id;
-        const data = await fetch("http://localhost:3001/favoritos/usuario/" + idUser);
+        const data = await fetch("https://bicimarketplace.onrender.com/favoritos/usuario/" + idUser);
         const res = await data.json();
         setFavoritos(res);
     }
