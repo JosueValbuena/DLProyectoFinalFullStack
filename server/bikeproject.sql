@@ -30,7 +30,8 @@ CREATE TABLE Publicaciones (
   descripcion TEXT,
   stock INT,
   precio INT,
-  fecha_publicacion TIMESTAMP
+  fecha_publicacion TIMESTAMP,
+  img VARCHAR
 );
 
 -- Crea tabla Imagenes
