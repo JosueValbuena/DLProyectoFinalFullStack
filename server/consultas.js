@@ -2,7 +2,7 @@ const pool = require("./server");
 const bcrypt = require("bcryptjs");
 
 const getProducts = async () => {
-    const query = "SELECT * FROM publicaciones";
+    const query = "SELECT publicaciones.*, usuarios.nombre FROM publicaciones INNER JOIN usuarios ON publicaciones.id_usuario = usuarios.id";
     const { rows: products } = await pool.query(query);
     return products
 }

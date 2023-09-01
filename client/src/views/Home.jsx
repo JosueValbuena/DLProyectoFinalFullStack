@@ -10,6 +10,7 @@ const Home = () => {
     const [dataPromoted, setDataPromoted] = useState([]);
 
     const { data, getData } = useContext(DataContext);
+    console.log(data);
 
     const getProdutcsPromoted = async () => {
         const data = await axios.get("https://bicimarketplace.onrender.com/publicacionesPromoted");

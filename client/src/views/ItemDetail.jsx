@@ -104,7 +104,7 @@ const ItemDetail = () => {
         <img className="itemDetail-img" src={product.img} alt="" />
         <div>
           <h3>{product.titulo}</h3>
-          <p>Vendido por {product.id_usuario}</p>
+          <p>Vendido por {product.nombre}</p>
           <p>{product.descripcion}</p>
           <p>{product.precio}</p>
           <button className="itemDetail-button" onClick={addSC}>
